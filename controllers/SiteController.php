@@ -121,8 +121,21 @@ class SiteController extends Controller
      *
      * @return string
      */
+
     public function actionAbout()
     {
         return $this->render('about');
     }
+
+    public function actionLoginselect()
+    {
+        return $this->render('loginselect');
+        
+    }
+
+    public function actionSay()
+    {
+        return $this->render('say');
+    }
+
 }

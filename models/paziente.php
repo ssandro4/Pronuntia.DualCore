@@ -11,7 +11,7 @@ use Yii;
  * @property string|null $NOME
  * @property string|null $MAIL
  */
-class paziente extends \yii\db\ActiveRecord
+class Paziente extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}

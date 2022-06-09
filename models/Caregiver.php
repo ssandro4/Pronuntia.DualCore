@@ -31,11 +31,11 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
     public function rules()
     {
         return [
-            [['idCaregiver'], 'required'],
-            [['idCaregiver'], 'integer'],
+            [['id'], 'required'],
+            [['id'], 'integer'],
             [['nome', 'cognome', 'email'], 'string', 'max' => 24],
             [['password'], 'string', 'max' => 16],
-            [['idCaregiver'], 'unique'],
+            [['id'], 'unique'],
         ];
     }
 
@@ -45,7 +45,7 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
     public function attributeLabels()
     {
         return [
-            'idCaregiver' => 'Id Caregiver',
+            'id' => 'Id Caregiver',
             'nome' => 'Nome',
             'cognome' => 'Cognome',
             'email' => 'Email',
@@ -88,7 +88,7 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['access_token' => $token]);
+        return static::findOne(['accessToken' => $token]);
     }
 
     /**
@@ -96,7 +96,7 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
      */
     public function getId()
     {
-        return $this->idCaregiver;
+        return $this->id;
     }
 
     /**

@@ -15,6 +15,5 @@ $this->title = 'BUKKINNN';
 </div>
 <?php 
 $countries = Caregiver::find()->all();
-echo $countries[1]->nome;
 ?>
 

@@ -26,7 +26,7 @@ nome varchar(24),
 cognome varchar(24),
 caregiver int,
 logopedista int,
-FOREIGN KEY (caregiver) references Caregiver(idCaregiver),
+FOREIGN KEY (caregiver) references Caregiver(id),
 FOREIGN KEY (logopedista) references Logopedista(idLogopedista));
 
 create table Parola(

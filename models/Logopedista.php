@@ -33,7 +33,8 @@ class Logopedista extends \yii\db\ActiveRecord  implements \yii\web\IdentityInte
         return [
         //    [['idLogopedista'], 'required'],
             [['idLogopedista'], 'integer'],
-            [['nome', 'cognome', 'email'], 'string', 'max' => 24],
+            [['nome', 'cognome'], 'string', 'max' => 24],
+            [['email'], 'email'],
             [['password'], 'string', 'max' => 16],
             [['idLogopedista'], 'unique'],
         ];

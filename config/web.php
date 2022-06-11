@@ -2,7 +2,8 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-
+$user = \Yii::$app->user;  
+$caregiver = \Yii::$app->caregiver; 
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
@@ -21,6 +22,7 @@ $config = [
         ],
         'user' => [
             'class'=>'yii\web\User',
+<<<<<<< Updated upstream
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => false,
         ],
@@ -34,6 +36,11 @@ $config = [
             'identityClass' => 'app\models\Caregiver',
             'enableAutoLogin' => false,
         ],
+=======
+            'identityClass' => 'app\models\Caregiver',
+            'enableAutoLogin' => false,
+        ],       
+>>>>>>> Stashed changes
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

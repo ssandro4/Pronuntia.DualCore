@@ -12,11 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-<<<<<<< Updated upstream
-=======
     <?= $form->field($model, 'idCaregiver')->textInput() ?>
 
->>>>>>> Stashed changes
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'cognome')->textInput(['maxlength' => true]) ?>

@@ -10,7 +10,7 @@ email varchar(24),
 password varchar(16)
 );
 create table Caregiver(
-id int primary key,
+idCaregiver int auto_increment primary key,
 nome varchar(24),
 cognome varchar(24),
 email varchar(24),
@@ -26,7 +26,7 @@ nome varchar(24),
 cognome varchar(24),
 caregiver int,
 logopedista int,
-FOREIGN KEY (caregiver) references Caregiver(id),
+FOREIGN KEY (caregiver) references Caregiver(idCaregiver),
 FOREIGN KEY (logopedista) references Logopedista(idLogopedista));
 
 create table Parola(
@@ -45,7 +45,7 @@ FOREIGN KEY (parola2) references Parola(parola));
 insert into Logopedista value
 (1,"Mario","Rossi", "mar.rosso@libero.it","iLoveZumba");
 
-insert into Caregiver values
-(1,"Giovanni","Marroni", "giov.mar@gmail.com","Ketchup3Maionese","test100key","100-token"),
-(2,"Simone","Verdi","simo.ver@tiscali.it","SimoneTrimone","test101key","101-token");
+insert into Caregiver (nome,cognome,email,password,authKey,accessToken) values
+("Giovanni","Marroni", "giov.mar@gmail.com","Ketchup3Maionese","test100key","100-token"),
+("Simone","Verdi","simo.ver@tiscali.it","SimoneTrimone","test101key","101-token");
 select * from caregiver;

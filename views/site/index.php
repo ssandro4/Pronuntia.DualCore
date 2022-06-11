@@ -60,7 +60,7 @@ $this->title = 'Pronuntia';
     <h1>Area Caregiver</h1>
     <p>entra nell'area del caregiver blablablablablablablablablablablablablablablablablabla
         </p>
-    <form action="/site/login">
+    <form action="/caregiver/index">
     <button class="btn btn-lg btn-primary" type="submit">  <strong>Log in Caregiver</strong></button></form>
 </div>
 

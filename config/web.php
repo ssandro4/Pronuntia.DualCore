@@ -22,7 +22,7 @@ $config = [
         ],
         'user' => [
             'class'=>'yii\web\User',
-            'identityClass' => 'app\models\Caregiver',
+            'identityClass' => 'app\models\Logopedista',
             'enableAutoLogin' => false,
         ],       
         'errorHandler' => [

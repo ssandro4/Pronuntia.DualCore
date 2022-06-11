@@ -4,6 +4,8 @@
 use app\models\Caregiver;
 use yii\helpers\Html;
 use app\models\Logopedista;
+use app\models\Paziente;
+
 $this->title = 'BUKKINNN';
 ?>
 
@@ -14,6 +16,7 @@ $this->title = 'BUKKINNN';
         <strong>bukkin</strong></h1>
 </div>
 <?php 
-$countries = Caregiver::find()->all();
+$countries = Logopedista::find()->all();
+echo $countries[0]->nome;
 ?>
 

@@ -73,7 +73,7 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = Caregiver::findByUsername($this->username);
+            $this->_user = Logopedista::findByUsername($this->username);
         }
 
         return $this->_user;

@@ -12,21 +12,14 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-<<<<<<< Updated upstream
-=======
     
->>>>>>> Stashed changes
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'cognome')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-<<<<<<< Updated upstream
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
-=======
     <?= $form->field($model, 'password')->textInput(['maxlength' => true]) ?>
->>>>>>> Stashed changes
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

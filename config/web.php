@@ -22,25 +22,9 @@ $config = [
         ],
         'user' => [
             'class'=>'yii\web\User',
-<<<<<<< Updated upstream
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => false,
-        ],
-        'logopedista' => [
-            'class'=>'yii\web\User',
-            'identityClass' => 'app\models\Logopedista',
-            'enableAutoLogin' => false,
-        ],
-        'caregiver' => [
-            'class'=>'yii\web\Caregiver',
-            'identityClass' => 'app\models\Caregiver',
-            'enableAutoLogin' => false,
-        ],
-=======
             'identityClass' => 'app\models\Caregiver',
             'enableAutoLogin' => false,
         ],       
->>>>>>> Stashed changes
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

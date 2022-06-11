@@ -49,11 +49,7 @@ class CaregiverController extends Controller
 
     /**
      * Displays a single Caregiver model.
-<<<<<<< Updated upstream
-     * @param int $idCaregiver Id Caregiver
-=======
      * @param int $idCaregiver
->>>>>>> Stashed changes
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -89,11 +85,7 @@ class CaregiverController extends Controller
     /**
      * Updates an existing Caregiver model.
      * If update is successful, the browser will be redirected to the 'view' page.
-<<<<<<< Updated upstream
-     * @param int $idCaregiver Id Caregiver
-=======
      * @param int $idCaregiver
->>>>>>> Stashed changes
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -113,11 +105,7 @@ class CaregiverController extends Controller
     /**
      * Deletes an existing Caregiver model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-<<<<<<< Updated upstream
-     * @param int $idCaregiver Id Caregiver
-=======
      * @param int $idCaregiver
->>>>>>> Stashed changes
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -131,11 +119,7 @@ class CaregiverController extends Controller
     /**
      * Finds the Caregiver model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-<<<<<<< Updated upstream
-     * @param int $idCaregiver Id Caregiver
-=======
      * @param int $idCaregiver
->>>>>>> Stashed changes
      * @return Caregiver the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

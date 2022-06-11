@@ -32,20 +32,12 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
     public function rules()
     {
         return [
-<<<<<<< Updated upstream
-         //   [['id'], 'required'],
-         //   [['id'], 'integer'],
-            [['nome', 'cognome', 'email'], 'string', 'max' => 24],
-            [['password'], 'string', 'max' => 16],
-         //   [['id'], 'unique'],
-=======
         //    [['idCaregiver'], 'required'],
        //     [['idCaregiver'], 'integer'],
             [['nome', 'cognome', 'email'], 'string', 'max' => 24],
             [['password'], 'string', 'max' => 16],
             ['email', 'email'],
         //    [['idCaregiver'], 'unique'],
->>>>>>> Stashed changes
         ];
     }/**
      * {@inheritdoc}

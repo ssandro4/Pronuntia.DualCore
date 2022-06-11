@@ -1,17 +1,10 @@
 <?php
 
-<<<<<<< Updated upstream
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\grid\ActionColumn;
-use yii\widgets\ListView;
-=======
 use app\models\Caregiver;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
->>>>>>> Stashed changes
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CaregiverSearch */
@@ -28,17 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Caregiver', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-<<<<<<< Updated upstream
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->idCaregiver), ['view', 'idCaregiver' => $model->idCaregiver]);
-        },
-    ]) ?>
-=======
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
@@ -62,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],*/
         ],
     ]); ?>
->>>>>>> Stashed changes
 
 
 </div>

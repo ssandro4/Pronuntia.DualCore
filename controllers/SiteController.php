@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Caregiver;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -136,6 +137,23 @@ class SiteController extends Controller
     public function actionSay()
     {
         return $this->render('say');
+    }
+
+    
+    public function actionAggiungicaregiver()
+    {
+        $model = new \app\models\Caregiver();
+    
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                // form inputs are valid, do something here
+                return;
+            }
+        }
+    
+        return $this->render('aggiungicaregiver', [
+            'model' => $model,
+        ]);
     }
 
 }

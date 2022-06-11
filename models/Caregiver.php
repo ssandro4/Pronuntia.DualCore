@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use yii\base\Model;
 
 use Yii;
 
@@ -31,21 +32,19 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['id'], 'integer'],
+         //   [['id'], 'required'],
+         //   [['id'], 'integer'],
             [['nome', 'cognome', 'email'], 'string', 'max' => 24],
             [['password'], 'string', 'max' => 16],
-            [['id'], 'unique'],
+         //   [['id'], 'unique'],
         ];
-    }
-
-    /**
+    }/**
      * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id' => 'Id Caregiver',
+            'idCaregiver' => 'Id Caregiver',
             'nome' => 'Nome',
             'cognome' => 'Cognome',
             'email' => 'Email',
@@ -96,7 +95,7 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
      */
     public function getId()
     {
-        return $this->id;
+        return $this->idCaregiver;
     }
 
     /**

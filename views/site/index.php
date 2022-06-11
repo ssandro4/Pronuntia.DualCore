@@ -6,7 +6,7 @@ $this->title = 'Pronuntia';
 <style>
 
     .container {
-    height: 30px;
+    height: 70px;
     position: relative;
     
     }
@@ -20,16 +20,21 @@ $this->title = 'Pronuntia';
     margin: 16px 16px;
     }
 
+    .logbtn{  
+        border-radius: 8px;
+    border: 2px solid black; 
+    text-align: center;
+    background-color: gray;  
+
+    }
+
     .btn {
     border-radius: 8px;
     border: 2px solid black; 
     color: black;
-    padding: 15px 32px;
     text-align: center;
-    display: inline-block;
     font-size: 18px;
-    margin: 4px 4px;
-    cursor: pointer;
+    margin: 8px 8px;
     background-color: gray;
     height:70px;
     width:250px;
@@ -68,15 +73,20 @@ $this->title = 'Pronuntia';
 </div>
 
     </div>
-    <hr class="solid">
+
     <div class="container">
+
         </div>
         <h2>C'hai un bimbo con problemi?</h2>
             <p>Vai su sto cazzo di  <a href="https://youtu.be/AoOqZJ6CJbg?list=LL&t=4">link</a> e fatti l'autotest</p>
             <p><small>il test potrebbe provocare la morte.</small>
             </p>         
     </div>
-
+    <div class="col-4">
+    <h1>AGGIUNGI IL CAREGIVER  </h1>
+    <form action="/caregiver/index">
+    <button class="btn btn-lg btn-primary" type="submit">  <strong>AGGIUNGILO </strong></button></form>
+    </div>
 
 </div>
 

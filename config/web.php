@@ -20,8 +20,19 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
+            'class'=>'yii\web\User',
+            'identityClass' => 'app\models\User',
+            'enableAutoLogin' => false,
+        ],
+        'logopedista' => [
+            'class'=>'yii\web\User',
+            'identityClass' => 'app\models\Logopedista',
+            'enableAutoLogin' => false,
+        ],
+        'caregiver' => [
+            'class'=>'yii\web\Caregiver',
             'identityClass' => 'app\models\Caregiver',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

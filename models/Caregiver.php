@@ -37,6 +37,7 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
             [['nome', 'cognome', 'email'], 'string', 'max' => 24],
             [['password'], 'string', 'max' => 16],
             ['email', 'email'],
+            [['email'], 'unique'],
         //    [['idCaregiver'], 'unique'],
         ];
     }/**

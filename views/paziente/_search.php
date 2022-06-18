@@ -21,9 +21,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cognome') ?>
 
+    <?= $form->field($model, 'diagnosi') ?>
+
     <?= $form->field($model, 'caregiver') ?>
 
-    <?= $form->field($model, 'logopedista') ?>
+    <?php // echo $form->field($model, 'logopedista') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

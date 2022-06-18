@@ -21,6 +21,7 @@ use yii\widgets\ActiveForm;
 
     < ?= $form->field($model, 'logopedista')->textInput() ?>
 -->
+    <?= $form->field($model, 'diagnosi')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

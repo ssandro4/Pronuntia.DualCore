@@ -14,6 +14,45 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
+
+
+<style>
+
+    .col-3 {
+    -moz-hyphens:auto;
+    -ms-hyphens:auto;
+    -webkit-hyphens:auto;
+    hyphens:auto;
+    word-wrap:break-word;
+    margin: 16px 16px;
+    }
+
+    .logbtn{  
+        border-radius: 8px;
+    border: 3px solid black; 
+    text-align: center;
+    background-color: teal;  
+
+    }
+
+    .btn {
+    border-radius: 8px;
+    border: 2px solid black; 
+    color: black;
+    text-align: center;
+    font-size: 18px;
+    margin: 8px 8px;
+    height:60px;
+    width:240px;
+    }
+
+    hr.solid{
+        border-top: 3px solid #bbb;
+    }
+
+</style>
+
+
 <html lang="<?= Yii::$app->language ?>" class="h-100">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
@@ -42,6 +81,7 @@ AppAsset::register($this);
             ['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'Crea Caregiver', 'url' => ['/caregiver/create']],
             ['label' => 'Crea Paziente', 'url' => ['/paziente/create']],
+            ['label' => 'Aggiungi Parola', 'url' => ['/parola/create']],
             
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]

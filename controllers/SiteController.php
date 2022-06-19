@@ -65,7 +65,7 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-
+/*
     public function actionCreacaregiver()
     {
         $model= new Caregiver();
@@ -73,7 +73,7 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
-
+*/
     /**
      * Login action.
      *
@@ -161,6 +161,22 @@ class SiteController extends Controller
         }
     
         return $this->render('aggiungicaregiver', [
+            'model' => $model,
+        ]);
+    }
+    
+    public function actionAggiungiparola()
+    {
+        $model = new \app\models\Parola();
+    
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                // form inputs are valid, do something here
+                return;
+            }
+        }
+    
+        return $this->render('aggiungiparola', [
             'model' => $model,
         ]);
     }

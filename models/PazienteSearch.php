@@ -18,7 +18,7 @@ class PazienteSearch extends Paziente
     {
         return [
             [['idPaziente', 'caregiver', 'logopedista'], 'integer'],
-            [['nome', 'cognome'], 'safe'],
+            [['nome', 'cognome', 'diagnosi'], 'safe'],
         ];
     }
 
@@ -64,7 +64,8 @@ class PazienteSearch extends Paziente
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'cognome', $this->cognome]);
+            ->andFilterWhere(['like', 'cognome', $this->cognome])
+            ->andFilterWhere(['like', 'diagnosi', $this->diagnosi]);
 
         return $dataProvider;
     }

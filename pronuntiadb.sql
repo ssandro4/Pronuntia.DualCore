@@ -25,8 +25,9 @@ accessToken varchar(9)
 
 create table paziente(
 idPaziente int auto_increment primary key,
-nome varchar(24),
-cognome varchar(24),
+nome varchar(24) not null,
+cognome varchar(24) not null,
+diagnosi varchar(128),
 caregiver int,
 logopedista int,
 FOREIGN KEY (caregiver) references Caregiver(idCaregiver),
@@ -40,16 +41,12 @@ pathMP3 varchar (52));
 
 create table Esercizio(
 idEsercizio varchar(52) primary key,
-tipo enum('audio','immagine')
+parola varchar(24),
+tipo enum('audio','immagine'),
+foreign key (parola) references Parola(idParola)
 );
 
-create table ComposizioneEsercizio(
-esercizio varchar(52),
-parola varchar(24),
-FOREIGN KEY (esercizio) references Esercizio(idEsercizio),
-FOREIGN KEY (parola) references Parola(idParola),
-primary key (esercizio, parola)
-);
+
 
 create table Sessione(
 idSessione varchar(24) primary key,
@@ -90,7 +87,7 @@ insert into Caregiver (nome,cognome,email,password,authKey,accessToken) values
 select * from caregiver;
 
 insert into Paziente value
-(1,"Pino","Pini",1,1);
+(1,"Pino","Pini","dislessia, discalculia",1,1);
 
 select * from paziente;
 select * from logopedista;

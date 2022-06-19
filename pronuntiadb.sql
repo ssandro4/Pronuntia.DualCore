@@ -42,8 +42,11 @@ pathMP3 varchar (52));
 create table Esercizio(
 idEsercizio varchar(52) primary key,
 parola varchar(24),
-tipo enum('audio','immagine'),
-foreign key (parola) references Parola(idParola)
+parola2 varchar(24),
+tipo enum('Audio','Immagine', 'Coppia Minima'),
+constraint CHK_coppiaMinima CHECK (tipo='Coppia Minima' or parola2 = null),
+foreign key (parola) references Parola(idParola),
+foreign key (parola2) references Parola(idParola)
 );
 
 
@@ -70,14 +73,14 @@ primary key (sessione, paziente),
 foreign key (sessione) references Sessione(idSessione),
 foreign key (paziente) references Paziente(idPaziente)
 );
-
+/*
 create table CoppiaMinima(
 idCoppia varchar(52) PRIMARY KEY,
 parola1 varchar(24),
 parola2 varchar(24),
 FOREIGN KEY (parola1) references Parola(idParola),
 FOREIGN KEY (parola2) references Parola(idParola));
-
+*/
 insert into Logopedista value
 (1,"Mario","Rossi", "mar.rosso@libero.it","LogoLoco","test200key","200-token");
 

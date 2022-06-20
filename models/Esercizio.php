@@ -34,12 +34,13 @@ class Esercizio extends \yii\db\ActiveRecord
     {
         return [
             [['idEsercizio'], 'required'],
-            [['tipo'], 'string'],
+            [['tipo'], 'string'],            [['tipo'], 'required'],
             [['idEsercizio'], 'string', 'max' => 52],
             [['parola', 'parola2'], 'string', 'max' => 24],
             [['idEsercizio'], 'unique'],
             [['parola'], 'exist', 'skipOnError' => true, 'targetClass' => Parola::className(), 'targetAttribute' => ['parola' => 'idParola']],
             [['parola2'], 'exist', 'skipOnError' => true, 'targetClass' => Parola::className(), 'targetAttribute' => ['parola2' => 'idParola']],
+            [['parola'], 'required'],            [['parola2'], 'required'],
         ];
     }
 
@@ -61,10 +62,14 @@ class Esercizio extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
+
+/*
     public function getComposizionesessiones()
     {
         return $this->hasMany(Composizionesessione::className(), ['esercizio' => 'idEsercizio']);
     }
+
+*/
 
     /**
      * Gets query for [[Parola0]].
@@ -91,8 +96,12 @@ class Esercizio extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
+
+     /*
     public function getSessiones()
     {
         return $this->hasMany(Sessione::className(), ['idSessione' => 'sessione'])->viaTable('composizionesessione', ['esercizio' => 'idEsercizio']);
+        
     }
+    */
 }

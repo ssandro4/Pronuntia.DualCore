@@ -81,7 +81,8 @@ AppAsset::register($this);
             ['label' => 'Contact', 'url' => ['/site/contact']],
             ['label' => 'Crea Caregiver', 'url' => ['/caregiver/create']],
             ['label' => 'Crea Paziente', 'url' => ['/paziente/create']],
-            ['label' => 'Aggiungi Parola', 'url' => ['/parola/create']],
+            ['label' => 'Crea Parola', 'url' => ['/parola/create']],
+            ['label' => 'Crea Esercizio', 'url' => ['/esercizio/create']],
             
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]

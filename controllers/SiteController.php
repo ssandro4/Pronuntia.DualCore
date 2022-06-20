@@ -149,9 +149,9 @@ class SiteController extends Controller
         return $this->render('questionario');
     }
 
-    public function actionDownload()
+    public function actionDownloadquestionario()
     {
-    return \Yii::$app->response->sendFile('pronuntiadb.sql');
+    return Yii::$app->response->sendFile(Yii::getAlias('@app/src/tvl.pdf'));
     }
     
     public function actionSay()

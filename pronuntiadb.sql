@@ -2,76 +2,87 @@ drop database if exists pronuntiadb;
 create database if not exists pronuntiadb;
 use pronuntiadb;
 
-create table Logopedista(
-idLogopedista int auto_increment primary key,
-nome varchar(24),
-cognome varchar(24),
-email varchar(24),
-password varchar(16),
-authKey varchar(12) ,
-accessToken varchar(9)
+CREATE TABLE Logopedista (
+    idLogopedista INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(24),
+    cognome VARCHAR(24),
+    email VARCHAR(24),
+    password VARCHAR(16),
+    authKey VARCHAR(12),
+    accessToken VARCHAR(9)
 );
 
-create table Caregiver(
-idCaregiver int auto_increment primary key,
-nome varchar(24),
-cognome varchar(24),
-email varchar(24),
-password varchar(16),
-authKey varchar(12) ,
-accessToken varchar(9)
-
+CREATE TABLE Caregiver (
+    idCaregiver INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(24),
+    cognome VARCHAR(24),
+    email VARCHAR(24),
+    password VARCHAR(16),
+    authKey VARCHAR(12),
+    accessToken VARCHAR(9)
 );
 
-create table paziente(
-idPaziente int auto_increment primary key,
-nome varchar(24) not null,
-cognome varchar(24) not null,
-diagnosi varchar(128),
-caregiver int,
-logopedista int,
-FOREIGN KEY (caregiver) references Caregiver(idCaregiver),
-FOREIGN KEY (logopedista) references Logopedista(idLogopedista));
+CREATE TABLE paziente (
+    idPaziente INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(24) NOT NULL,
+    cognome VARCHAR(24) NOT NULL,
+    diagnosi VARCHAR(128),
+    caregiver INT,
+    logopedista INT,
+    FOREIGN KEY (caregiver)
+        REFERENCES Caregiver (idCaregiver),
+    FOREIGN KEY (logopedista)
+        REFERENCES Logopedista (idLogopedista)
+);
 
-create table Parola(
-idParola varchar(24) PRIMARY KEY,
-tag varchar(52),
-pathIMG varchar(52),
-pathMP3 varchar (52));
+CREATE TABLE Parola (
+    idParola VARCHAR(24) PRIMARY KEY,
+    tag VARCHAR(52),
+    pathIMG VARCHAR(52),
+    pathMP3 VARCHAR(52)
+);
 
-create table Esercizio(
-idEsercizio varchar(52) primary key,
-parola varchar(24),
-parola2 varchar(24),
-tipo enum('Audio','Immagine', 'Coppia Minima'),
-constraint CHK_coppiaMinima CHECK (tipo='Coppia Minima' or parola2 = null),
-foreign key (parola) references Parola(idParola),
-foreign key (parola2) references Parola(idParola)
+insert into parola (idParola) value ('Parola2');
+
+CREATE TABLE Esercizio (
+    idEsercizio VARCHAR(52) PRIMARY KEY,
+    parola VARCHAR(24) NOT NULL,
+    parola2 VARCHAR(24) DEFAULT 'Parola2',
+    tipo ENUM('Audio', 'Immagine', 'Coppia Minima'),
+    CONSTRAINT CHK_coppiaMinima CHECK (parola <> parola2),
+    FOREIGN KEY (parola)
+        REFERENCES Parola (idParola),
+    FOREIGN KEY (parola2)
+        REFERENCES Parola (idParola)
 );
 
 
 
-create table Sessione(
-idSessione varchar(24) primary key,
-note varchar(256)
+CREATE TABLE Sessione (
+    idSessione VARCHAR(24) PRIMARY KEY,
+    note VARCHAR(256)
 );
 
-create table ComposizioneSessione(
-sessione varchar(24),
-esercizio varchar(52),
-foreign key (sessione) references Sessione(idSessione),
-foreign key (esercizio) references Esercizio(idEsercizio),
-PRIMARY KEY (sessione, esercizio)
+CREATE TABLE ComposizioneSessione (
+    sessione VARCHAR(24),
+    esercizio VARCHAR(52),
+    FOREIGN KEY (sessione)
+        REFERENCES Sessione (idSessione),
+    FOREIGN KEY (esercizio)
+        REFERENCES Esercizio (idEsercizio),
+    PRIMARY KEY (sessione , esercizio)
 );
 
-create table AssegnazioneSessione(
-sessione varchar(24),
-paziente int,
-esito enum('corretto', 'errato', 'non svolto') default null,
-nuovo boolean default true,
-primary key (sessione, paziente),
-foreign key (sessione) references Sessione(idSessione),
-foreign key (paziente) references Paziente(idPaziente)
+CREATE TABLE AssegnazioneSessione (
+    sessione VARCHAR(24),
+    paziente INT,
+    esito ENUM('corretto', 'errato', 'non svolto') DEFAULT NULL,
+    nuovo BOOLEAN DEFAULT TRUE,
+    PRIMARY KEY (sessione , paziente),
+    FOREIGN KEY (sessione)
+        REFERENCES Sessione (idSessione),
+    FOREIGN KEY (paziente)
+        REFERENCES Paziente (idPaziente)
 );
 /*
 create table CoppiaMinima(
@@ -91,6 +102,11 @@ select * from caregiver;
 
 insert into Paziente value
 (1,"Pino","Pini","dislessia, discalculia",1,1);
+insert into parola (idparola) values
+("cane"),
+("serpente"),
+("cono"),
+("gatto");
 
 select * from paziente;
 select * from logopedista;

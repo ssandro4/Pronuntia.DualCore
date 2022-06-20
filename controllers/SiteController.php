@@ -143,6 +143,12 @@ class SiteController extends Controller
         
     }
 
+
+    public function actionQuestionario()
+    {
+        return $this->render('questionario');
+    }
+
     public function actionSay()
     {
         return $this->render('say');

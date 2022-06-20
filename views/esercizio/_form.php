@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Caregiver;
+use app\models\ParolaSearch;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -19,6 +21,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'parola2')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'tipo')->dropDownList([ 'Audio' => 'Audio', 'Immagine' => 'Immagine', 'Coppia Minima' => 'Coppia Minima', ], ['prompt' => '']) ?>
+    
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -81,7 +81,7 @@ $this->title = 'Pronuntia';
         </div>
         <h2>Blocco test</h2>
             <p>Link per il test autodiagnostico: <a href="site/questionario">clicca qui!</a></p>
-            <p><small>il test non si sostitusice alla diagnosi</small>
+            <p><small>Il test non si sostitusice alla diagnosi</small>
             </p>         
 
 

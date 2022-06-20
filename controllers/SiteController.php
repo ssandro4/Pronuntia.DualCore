@@ -149,6 +149,11 @@ class SiteController extends Controller
         return $this->render('questionario');
     }
 
+    public function actionDownload()
+    {
+    return \Yii::$app->response->sendFile('pronuntiadb.sql');
+    }
+    
     public function actionSay()
     {
         return $this->render('say');

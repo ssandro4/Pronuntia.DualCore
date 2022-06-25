@@ -59,8 +59,7 @@ CREATE TABLE Esercizio (
 
 
 CREATE TABLE Sessione (
-    idSessione VARCHAR(24) PRIMARY KEY,
-    note VARCHAR(256)
+    idSessione VARCHAR(24) PRIMARY KEY
 );
 
 CREATE TABLE ComposizioneSessione (
@@ -76,8 +75,11 @@ CREATE TABLE ComposizioneSessione (
 CREATE TABLE AssegnazioneSessione (
     sessione VARCHAR(24),
     paziente INT,
-    esito ENUM('corretto', 'errato', 'non svolto') DEFAULT NULL,
     nuovo BOOLEAN DEFAULT TRUE,
+    cntErrori INT DEFAULT 0,
+    elencoErrori VARCHAR(256),
+    esito VARCHAR(256) DEFAULT NULL,
+    note VARCHAR(256) DEFAULT NULL,
     PRIMARY KEY (sessione , paziente),
     FOREIGN KEY (sessione)
         REFERENCES Sessione (idSessione),
@@ -98,7 +100,10 @@ insert into Logopedista value
 insert into Caregiver (nome,cognome,email,password,authKey,accessToken) values
 ("Giovanni","Marroni", "giov.mar@gmail.com","Ketchup3Maionese","test100key","100-token"),
 ("Simone","Verdi","simo.ver@tiscali.it","SimoneLimone","test101key","101-token");
-select * from caregiver;
+SELECT 
+    *
+FROM
+    caregiver;
 
 insert into Paziente value
 (1,"Pino","Pini","dislessia, discalculia",1,1);
@@ -108,6 +113,17 @@ insert into parola (idparola) values
 ("cono"),
 ("gatto");
 
-select * from paziente;
-select * from logopedista;
-select * from paziente, logopedista, caregiver;
+SELECT 
+    *
+FROM
+    paziente;
+SELECT 
+    *
+FROM
+    logopedista;
+SELECT 
+    *
+FROM
+    paziente,
+    logopedista,
+    caregiver;

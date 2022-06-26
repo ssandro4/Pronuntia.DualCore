@@ -35,7 +35,12 @@ class Parola extends \yii\db\ActiveRecord
         return [
             [['idParola'], 'required'],
             [['idParola'], 'string', 'max' => 24],
+<<<<<<< Updated upstream
             [['tag', 'pathIMG', 'pathMP3'], 'string', 'max' => 256],
+=======
+            [['tag'], 'string', 'max' => 52],
+            [['pathIMG', 'pathMP3'], 'string', 'max' => 256],
+>>>>>>> Stashed changes
             [['idParola'], 'unique'],
         ];
     }
@@ -53,35 +58,7 @@ class Parola extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * Gets query for [[Composizioneesercizios]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getComposizioneesercizios()
-    {
-        return $this->hasMany(Composizioneesercizio::className(), ['parola' => 'idParola']);
-    }
 
-    /**
-     * Gets query for [[Coppiaminimas]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCoppiaminimas()
-    {
-        return $this->hasMany(Coppiaminima::className(), ['parola1' => 'idParola']);
-    }
-
-    /**
-     * Gets query for [[Coppiaminimas0]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCoppiaminimas0()
-    {
-        return $this->hasMany(Coppiaminima::className(), ['parola2' => 'idParola']);
-    }
 
     /**
      * Gets query for [[Esercizios]].

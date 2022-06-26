@@ -1,23 +1,48 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\models\Esercizio;
+use app\models\Parola;
 /* @var $this yii\web\View */
 /* @var $model app\models\Esercizio */
 
+$img=Parola::findOne(['idParola'=>$esercizio->parola])->pathIMG;
+$id=Parola::findOne(['idParola'=>$esercizio->parola])->idParola;
 ?>
 
-<div class="svolgiesercizio">
+<?php echo $esercizio->idEsercizio ?> 
+<?php echo $esercizio->tipo ?> 
+<?php echo $esercizio->parola ?> 
+<?php echo $esercizio->parola2 ?> 
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'idEsercizio',
-            'parola',
-            'parola2',
-            'tipo',
-        ],
-    ]) ?>
-</div>
+<?php
+if ($esercizio->tipo=='Immagine') {
+        echo "IMMAGINEEEEEEEEEEEEEEEEEEEEEEEEEEEE";
+    } elseif ($esercizio->tipo=='Audio') {
+        echo "AUDIOOOOOOOOOOOOOOOOO";
+    } elseif ($esercizio->tipo=='Coppia Minima'){
+        echo "COPPIAAAAAAAAAAAAAAAAAAAA";
+    }
+?>
+
+<?php if($esercizio->tipo == 'Audio') : ?>
+    AUDIOOOOOOOOOOOOOOOOO
+
+
+
+<?php elseif($esercizio->tipo == 'Immagine') : ?>
+    IMMAGINEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+    
+    <img src= <?php echo "$img" ?>,
+             alt=<?php echo "$id" ?>, 
+            width="300" ,
+            height="300">
+    </div>
+
+
+
+<?php elseif($esercizio->tipo == 'Coppia Minima') : ?>
+    COPPIAAAAAAAAAAAAAAAAAAAA
+<?php else : ?>
+ Diocane
+<?php endif; ?>

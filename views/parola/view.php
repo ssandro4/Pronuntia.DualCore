@@ -40,4 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <div class="container">
+    <img src= <?php echo " $model->pathIMG " ?>,
+            alt=<?php echo $model->idParola ?>, 
+            width="300" ,
+            height="300">
+    </div>
+
+
 </div>

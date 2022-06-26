@@ -8,6 +8,14 @@ use yii\widgets\ActiveForm;
 
 ?>
 
+<style>
+
+    h1.hidden {
+    display: none;
+    }
+
+    </style>
+
 <div class="esercizio-form">
 
     <?php $form = ActiveForm::begin(); ?>
@@ -24,12 +32,15 @@ use yii\widgets\ActiveForm;
         ]);
         ?>
 
+    <hidden>
     <?=  $form->field($model, 'parola2')->textInput(['maxlength' => true, 'readonly' => $model->tipo!=='Coppia Minima' ])  ?>
-
+    </hidden>
+ 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
+    
     <?php ActiveForm::end(); ?>
 
 </div>

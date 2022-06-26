@@ -35,7 +35,7 @@ class Parola extends \yii\db\ActiveRecord
         return [
             [['idParola'], 'required'],
             [['idParola'], 'string', 'max' => 24],
-            [['tag', 'pathIMG', 'pathMP3'], 'string', 'max' => 52],
+            [['tag', 'pathIMG', 'pathMP3'], 'string', 'max' => 256],
             [['idParola'], 'unique'],
         ];
     }

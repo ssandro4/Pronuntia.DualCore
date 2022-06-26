@@ -35,12 +35,8 @@ class Parola extends \yii\db\ActiveRecord
         return [
             [['idParola'], 'required'],
             [['idParola'], 'string', 'max' => 24],
-<<<<<<< Updated upstream
-            [['tag', 'pathIMG', 'pathMP3'], 'string', 'max' => 256],
-=======
             [['tag'], 'string', 'max' => 52],
             [['pathIMG', 'pathMP3'], 'string', 'max' => 256],
->>>>>>> Stashed changes
             [['idParola'], 'unique'],
         ];
     }

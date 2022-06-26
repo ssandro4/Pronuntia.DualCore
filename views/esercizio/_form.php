@@ -33,7 +33,7 @@ use yii\widgets\ActiveForm;
         ?>
 
     <hidden>
-    <?=  $form->field($model, 'parola2')->textInput(['maxlength' => true, 'readonly' => $model->tipo!=='Coppia Minima' ])  ?>
+    <?=  $form->field($model, 'parola2')->textInput(['maxlength' => true ])  ?>
     </hidden>
  
     <div class="form-group">

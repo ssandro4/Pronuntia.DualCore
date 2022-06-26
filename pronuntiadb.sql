@@ -38,8 +38,8 @@ CREATE TABLE paziente (
 CREATE TABLE Parola (
     idParola VARCHAR(24) PRIMARY KEY,
     tag VARCHAR(52),
-    pathIMG VARCHAR(52),
-    pathMP3 VARCHAR(52)
+    pathIMG VARCHAR(256),
+    pathMP3 VARCHAR(256)
 );
 
 insert into parola (idParola) value ('Parola2');
@@ -127,3 +127,7 @@ FROM
     paziente,
     logopedista,
     caregiver;
+
+select * from esercizio;
+insert into esercizio (idesercizio, parola, tipo) value
+('canemp3','cane','audio');

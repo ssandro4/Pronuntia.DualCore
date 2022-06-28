@@ -5,18 +5,23 @@ use yii\helpers\Html;
 use app\models\Logopedista;
 use app\models\Parola;
 use app\models\Paziente;
+use app\models\Sessione;
 ?>
 
-<?php 
-$sql=Parola::find()->all();
+<?php
+$msg = Sessione::findOne('idSessione' == 'oipougytfdrf')->getComposizionesessiones()->all();
+if (Sessione::findOne('idSessione' == 'gianni')->getComposizionesessiones()->all())
+        echo $msg[0]->esercizio;
 
-foreach ($sql as $row){//Array or records stored in $row
+$sql = Parola::find()->all();
 
-        echo "<option value=$row[idParola]>$row[idParola]</option>"; 
-        /* Option values are added by looping through the array */ 
-        }
-        
- ?>
+foreach ($sql as $row) { //Array or records stored in $row
+
+        echo "<option value=$row[idParola]>$row[idParola]</option>";
+        /* Option values are added by looping through the array */
+}
+
+?>
 
 
 
@@ -40,33 +45,15 @@ foreach ($sql as $row){//Array or records stored in $row
 <div class="container">
         <img src=<?php echo $model->pathIMG ?> alt=<?php echo $model->idParola ?> , width="300" , height="300">
 </div>
-<<<<<<< Updated upstream
-
-
-
-<div class="container">
-  <img src= <?php ?>, alt=<?php ?>    
-        width="300" 
-        height="300">
-
-</div>
-<button class="btn btn-lg btn-primary">Button</button>
-
-<?php 
-=======
 <?php echo "$model->pathIMG" ?>
 
 <?php
->>>>>>> Stashed changes
 $countries = Logopedista::find()->all();
 //echo $countries[0]->nome;
 
 //$sql="SELECT name,id FROM student"; 
 
-<<<<<<< Updated upstream
-=======
 $sql = Parola::find()->all();
->>>>>>> Stashed changes
 
 /* You can add order by clause to the sql statement if the names are to be displayed in alphabetical order */
 
@@ -76,11 +63,7 @@ foreach ($sql as $row) { //Array or records stored in $row
 
         echo "<option value=$row[idParola]>$row[idParola]</option>";
 
-<<<<<<< Updated upstream
-
-=======
         /* Option values are added by looping through the array */
->>>>>>> Stashed changes
 }
 
 echo "</select>"; // Closing of list box

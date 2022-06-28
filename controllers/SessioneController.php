@@ -70,19 +70,20 @@ class SessioneController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Sessione();
+        $model1 = new Sessione();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-             echo Yii::$app->runAction('composizionesessione/create', ['sessione'=>$model->idSessione]);
-             return $this->redirect(['view', 'idSessione' => $model->idSessione]);
+            if ($model1->load($this->request->post()) && $model1->save()) {
+                if (!Sessione::findOne('idSessione' == $model1->idSessione)->getComposizionesessiones()->all())
+                return Yii::$app->runAction('composizionesessione/create', ['sessione'=>$model1->idSessione]);
+            return $this->redirect(['view', 'idSessione' => $model1->idSessione]);
             }
         } else {
-            $model->loadDefaultValues();
+            $model1->loadDefaultValues();
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model1,
         ]);
     }
 

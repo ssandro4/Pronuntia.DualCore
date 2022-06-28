@@ -131,3 +131,9 @@ FROM
 select * from esercizio;
 insert into esercizio (idesercizio, parola, tipo) value
 ('canemp3','cane','audio');
+
+select * from parola;
+select * from sessione;
+insert into composizionesessione value ('oipougytfdrf', 'canemp3');
+
+select * from composizionesessione;

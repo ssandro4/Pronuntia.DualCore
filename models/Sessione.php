@@ -8,10 +8,12 @@ use Yii;
  * This is the model class for table "sessione".
  *
  * @property string $idSessione
+ * @property int $logopedista
  *
  * @property Assegnazionesessione[] $assegnazionesessiones
  * @property Composizionesessione[] $composizionesessiones
  * @property Esercizio[] $esercizios
+ * @property Logopedista $logopedista0
  * @property Paziente[] $pazientes
  */
 class Sessione extends \yii\db\ActiveRecord
@@ -30,9 +32,11 @@ class Sessione extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idSessione'], 'required'],
+            [['idSessione', 'logopedista'], 'required'],
+            [['logopedista'], 'integer'],
             [['idSessione'], 'string', 'max' => 24],
             [['idSessione'], 'unique'],
+            [['logopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['logopedista' => 'idLogopedista']],
         ];
     }
 
@@ -43,6 +47,7 @@ class Sessione extends \yii\db\ActiveRecord
     {
         return [
             'idSessione' => 'Id Sessione',
+            'logopedista' => 'Logopedista',
         ];
     }
 
@@ -74,6 +79,16 @@ class Sessione extends \yii\db\ActiveRecord
     public function getEsercizios()
     {
         return $this->hasMany(Esercizio::className(), ['idEsercizio' => 'esercizio'])->viaTable('composizionesessione', ['sessione' => 'idSessione']);
+    }
+
+    /**
+     * Gets query for [[Logopedista0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLogopedista0()
+    {
+        return $this->hasOne(Logopedista::className(), ['idLogopedista' => 'logopedista']);
     }
 
     /**

@@ -8,11 +8,13 @@ use Yii;
  * This is the model class for table "esercizio".
  *
  * @property string $idEsercizio
- * @property string|null $parola
+ * @property string $parola
  * @property string|null $parola2
  * @property string|null $tipo
+ * @property int $logopedista
  *
  * @property Composizionesessione[] $composizionesessiones
+ * @property Logopedista $logopedista0
  * @property Parola $parola0
  * @property Parola $parola20
  * @property Sessione[] $sessiones
@@ -33,14 +35,15 @@ class Esercizio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idEsercizio'], 'required'],
-            [['tipo'], 'string'],            [['tipo'], 'required'],
+            [['idEsercizio', 'parola', 'logopedista'], 'required'],
+            [['tipo'], 'string'],
+            [['logopedista'], 'integer'],
             [['idEsercizio'], 'string', 'max' => 52],
             [['parola', 'parola2'], 'string', 'max' => 24],
             [['idEsercizio'], 'unique'],
+            [['logopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['logopedista' => 'idLogopedista']],
             [['parola'], 'exist', 'skipOnError' => true, 'targetClass' => Parola::className(), 'targetAttribute' => ['parola' => 'idParola']],
             [['parola2'], 'exist', 'skipOnError' => true, 'targetClass' => Parola::className(), 'targetAttribute' => ['parola2' => 'idParola']],
-            [['parola'], 'required'],            [['parola2'], 'required'],
         ];
     }
 
@@ -54,6 +57,7 @@ class Esercizio extends \yii\db\ActiveRecord
             'parola' => 'Parola',
             'parola2' => 'Parola 2',
             'tipo' => 'Tipo',
+            'logopedista' => 'Logopedista',
         ];
     }
 
@@ -62,14 +66,20 @@ class Esercizio extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-
-/*
     public function getComposizionesessiones()
     {
         return $this->hasMany(Composizionesessione::className(), ['esercizio' => 'idEsercizio']);
     }
 
-*/
+    /**
+     * Gets query for [[Logopedista0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLogopedista0()
+    {
+        return $this->hasOne(Logopedista::className(), ['idLogopedista' => 'logopedista']);
+    }
 
     /**
      * Gets query for [[Parola0]].
@@ -96,12 +106,8 @@ class Esercizio extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-
-     /*
     public function getSessiones()
     {
         return $this->hasMany(Sessione::className(), ['idSessione' => 'sessione'])->viaTable('composizionesessione', ['esercizio' => 'idEsercizio']);
-        
     }
-    */
 }

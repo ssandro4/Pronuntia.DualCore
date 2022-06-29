@@ -27,8 +27,8 @@ CREATE TABLE paziente (
     nome VARCHAR(24) NOT NULL,
     cognome VARCHAR(24) NOT NULL,
     diagnosi VARCHAR(128),
-    caregiver INT,
-    logopedista INT,
+    caregiver INT not null,
+    logopedista INT not null,
     FOREIGN KEY (caregiver)
         REFERENCES Caregiver (idCaregiver),
     FOREIGN KEY (logopedista)
@@ -49,6 +49,9 @@ CREATE TABLE Esercizio (
     parola VARCHAR(24) NOT NULL,
     parola2 VARCHAR(24) DEFAULT 'Parola2',
     tipo ENUM('Audio', 'Immagine', 'Coppia Minima'),
+    logopedista int not null,
+     FOREIGN KEY (logopedista)
+        REFERENCES Logopedista (idLogopedista),
     CONSTRAINT CHK_coppiaMinima CHECK (parola <> parola2),
     FOREIGN KEY (parola)
         REFERENCES Parola (idParola),
@@ -59,7 +62,10 @@ CREATE TABLE Esercizio (
 
 
 CREATE TABLE Sessione (
-    idSessione VARCHAR(24) PRIMARY KEY
+    idSessione VARCHAR(24) PRIMARY KEY,
+    logopedista int not null,
+     FOREIGN KEY (logopedista)
+        REFERENCES Logopedista (idLogopedista)
 );
 
 CREATE TABLE ComposizioneSessione (
@@ -95,7 +101,7 @@ FOREIGN KEY (parola1) references Parola(idParola),
 FOREIGN KEY (parola2) references Parola(idParola));
 */
 insert into Logopedista value
-(1,"Mario","Rossi", "mar.rosso@libero.it","LogoLoco","test200key","200-token");
+(1001,"Mario","Rossi", "mar.rosso@libero.it","LogoLoco","test200key","200-token");
 
 insert into Caregiver (nome,cognome,email,password,authKey,accessToken) values
 ("Giovanni","Marroni", "giov.mar@gmail.com","Ketchup3Maionese","test100key","100-token"),
@@ -106,34 +112,19 @@ FROM
     caregiver;
 
 insert into Paziente value
-(1,"Pino","Pini","dislessia, discalculia",1,1);
+(1,"Pino","Pini","dislessia, discalculia",1,1001);
 insert into parola (idparola) values
 ("cane"),
 ("serpente"),
 ("cono"),
 ("gatto");
 
-SELECT 
-    *
-FROM
-    paziente;
-SELECT 
-    *
-FROM
-    logopedista;
-SELECT 
-    *
-FROM
-    paziente,
-    logopedista,
-    caregiver;
 
-select * from esercizio;
-insert into esercizio (idesercizio, parola, tipo) value
-('canemp3','cane','audio');
-
-select * from parola;
-select * from sessione;
-insert into composizionesessione value ('oipougytfdrf', 'canemp3');
-
-select * from composizionesessione;
+insert into esercizio (idesercizio, parola, tipo, logopedista) values
+('canemp3','cane','Audio',1001),
+('cono-immagine','cono','Immagine',1001),
+('gattone', 'gatto','Audio',1001);
+insert into sessione values
+('mimmone',1001),
+('ginetto',1001),
+('pinuccio',1001);

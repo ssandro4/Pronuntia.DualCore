@@ -12,8 +12,12 @@ use Yii;
  * @property string|null $cognome
  * @property string|null $email
  * @property string|null $password
+ * @property string|null $authKey 
+ * @property string|null $accessToken 
  *
+ * @property Esercizio[] $esercizios 
  * @property Paziente[] $pazientes
+ * @property Sessione[] $sessiones 
  */
 class Logopedista extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
 {
@@ -31,7 +35,7 @@ class Logopedista extends \yii\db\ActiveRecord  implements \yii\web\IdentityInte
     public function rules()
     {
         return [
-        //    [['idLogopedista'], 'required'],
+            //    [['idLogopedista'], 'required'],
             [['idLogopedista'], 'integer'],
             [['nome', 'cognome'], 'string', 'max' => 24],
             [['email'], 'email'],
@@ -62,6 +66,26 @@ class Logopedista extends \yii\db\ActiveRecord  implements \yii\web\IdentityInte
     public function getPazientes()
     {
         return $this->hasMany(Paziente::className(), ['logopedista' => 'idLogopedista']);
+    }
+
+    /** 
+     * Gets query for [[Esercizios]]. 
+     * 
+     * @return \yii\db\ActiveQuery 
+     */
+    public function getEsercizios()
+    {
+        return $this->hasMany(Esercizio::className(), ['logopedista' => 'idLogopedista']);
+    }
+
+    /**
+     * Gets query for [[Sessiones]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSessiones()
+    {
+        return $this->hasMany(Sessione::className(), ['logopedista' => 'idLogopedista']);
     }
 
     public static function findByUsername($username)

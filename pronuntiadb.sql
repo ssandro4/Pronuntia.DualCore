@@ -86,6 +86,7 @@ CREATE TABLE AssegnazioneSessione (
     elencoErrori VARCHAR(256),
     esito VARCHAR(256) DEFAULT NULL,
     note VARCHAR(256) DEFAULT NULL,
+    dataCreazione datetime default current_timestamp,
     PRIMARY KEY (sessione , paziente),
     FOREIGN KEY (sessione)
         REFERENCES Sessione (idSessione),
@@ -128,3 +129,6 @@ insert into sessione values
 ('mimmone',1001),
 ('ginetto',1001),
 ('pinuccio',1001);
+insert into assegnazioneSessione (sessione,paziente) value
+('mimmone',1);
+select*from assegnazionesessione;

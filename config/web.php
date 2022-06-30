@@ -3,7 +3,6 @@
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 $user = \Yii::$app->user;  
-$caregiver = \Yii::$app->caregiver; 
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),

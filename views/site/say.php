@@ -33,14 +33,14 @@ foreach ($sql as $row) { //Array or records stored in $row
 
                 <h1>
                         <p style="font-family:georgia,garamond,serif;font-size:55px;font-style:italic;">
-                                <strong>Test</strong>
+                                <strong>Teeeeest</strong>
                 </h1>
 </div>
 
 <?php $model = Parola::findOne(['idParola' => 'cane']);
 ?>
 <audio controls='controls'>
-        <source src='" . $model->ficheiro  .   "' type='audio/mp3' />
+        <source src='app/src/gatto.mp3' />
 </audio>
 <div class="container">
         <img src=<?php echo $model->pathIMG ?> alt=<?php echo $model->idParola ?> , width="300" , height="300">

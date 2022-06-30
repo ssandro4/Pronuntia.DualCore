@@ -72,7 +72,7 @@ class PazienteController extends Controller
             return $this->goHome();
         }
         $model = new Paziente();
-        $model->caregiver=Yii::$app->user->identity->idLogopedista;
+        $model->logopedista=Yii::$app->user->identity->idLogopedista;
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'idPaziente' => $model->idPaziente]);
@@ -115,7 +115,10 @@ class PazienteController extends Controller
      */
     public function actionDelete($idPaziente)
     {
-        $this->findModel($idPaziente)->delete();
+       
+        $model = $this->findModel($idPaziente);
+        $model->visibile = false;
+        $model->save();
 
         return $this->redirect(['index']);
     }

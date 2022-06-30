@@ -45,7 +45,7 @@ class PazienteSearch extends Paziente
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query' => $query->where(['visibile'=>true]),
         ]);
 
         $this->load($params);

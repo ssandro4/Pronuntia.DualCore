@@ -115,7 +115,10 @@ class CaregiverController extends Controller
      */
     public function actionDelete($idCaregiver)
     {
-        $this->findModel($idCaregiver)->delete();
+     
+        $model = $this->findModel($idCaregiver);
+        $model->visibile = false;
+        $model->save();
 
         return $this->redirect(['index']);
     }

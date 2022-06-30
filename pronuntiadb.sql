@@ -18,6 +18,7 @@ CREATE TABLE Caregiver (
     cognome VARCHAR(24),
     email VARCHAR(24),
     password VARCHAR(16),
+    visibile boolean default true not null,
     authKey VARCHAR(12),
     accessToken VARCHAR(9)
 );
@@ -29,6 +30,7 @@ CREATE TABLE paziente (
     diagnosi VARCHAR(128),
     caregiver INT not null,
     logopedista INT not null,
+    visibile boolean default true not null,
     FOREIGN KEY (caregiver)
         REFERENCES Caregiver (idCaregiver),
     FOREIGN KEY (logopedista)
@@ -113,7 +115,7 @@ FROM
     caregiver;
 
 insert into Paziente value
-(1,"Pino","Pini","dislessia, discalculia",1,1001);
+(1,"Pino","Pini","dislessia, discalculia",1,1001, true);
 insert into parola (idparola) values
 ("cane"),
 ("serpente"),
@@ -132,3 +134,4 @@ insert into sessione values
 insert into assegnazioneSessione (sessione,paziente) value
 ('mimmone',1);
 select*from assegnazionesessione;
+select* from paziente;

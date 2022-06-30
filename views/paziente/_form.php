@@ -17,8 +17,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cognome')->textInput(['maxlength' => true]) ?>
 
-   <!-- < ?= $form->field($model, 'caregiver')->textInput() ?> 
-
+    <?= $form->field($model, 'caregiver')->textInput() ?> 
+ <!--
     < ?= $form->field($model, 'logopedista')->textInput() ?>
 -->
     <?= $form->field($model, 'diagnosi')->textInput(['maxlength' => true]) ?>

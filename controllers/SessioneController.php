@@ -6,10 +6,12 @@ use Yii;
 use app\models\Sessione;
 use app\models\SessioneSearch;
 use app\models\Composizionesessione;
+use app\models\ComposizionesessioneSearch;
 use app\controllers\ComposizionesessioneController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
 
 /**
  * SessioneController implements the CRUD actions for Sessione model.
@@ -58,8 +60,13 @@ class SessioneController extends Controller
      */
     public function actionView($idSessione)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($idSessione),
+        $searchModel = new ComposizionesessioneSearch();
+       // $dataProvider = $searchModel->search($this->request->queryParams);
+       $dataProvider = $searchModel->searchBySessione($idSessione);
+
+        return $this->render('composizione', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

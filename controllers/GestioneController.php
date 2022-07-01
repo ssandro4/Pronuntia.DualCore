@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\models\Sessione;
 use app\models\Composizionesessione;
-
+use Yii;
 
 class GestioneController extends \yii\web\Controller
 {
@@ -31,7 +31,7 @@ class GestioneController extends \yii\web\Controller
     {
         $sessione = new Sessione();
         $composizione = new Composizionesessione();
-
+        $sessione->logopedista=Yii::$app->user->identity->idLogopedista;
         if ($this->request->isPost) {
             if (($sessione->load($this->request->post()) && $sessione->save())||($composizione->load($this->request->post()) && $composizione->save())) {
                 

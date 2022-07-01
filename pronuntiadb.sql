@@ -134,4 +134,4 @@ insert into sessione values
 insert into assegnazioneSessione (sessione,paziente) value
 ('mimmone',1);
 select*from assegnazionesessione;
-select* from paziente;
+select* from eserciziogat;

@@ -78,7 +78,7 @@ class SessioneController extends Controller
     public function actionCreate()
     {
         $model1 = new Sessione();
-
+        $model1->logopedista=Yii::$app->user->identity->idLogopedista;
         if ($this->request->isPost) {
             if ($model1->load($this->request->post()) && $model1->save()) {
                 if (!Sessione::findOne('idSessione' == $model1->idSessione)->getComposizionesessiones()->all())

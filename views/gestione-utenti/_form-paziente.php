@@ -19,7 +19,7 @@ use app\models\Caregiver;
 
     <?= $form->field($model, 'cognome')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'paziente')
+    <?= $form->field($model, 'caregiver')
       ->dropDownList(ArrayHelper::map(Caregiver::find()->all(),'idCaregiver','nomeECognome'))
  ?>
     <?= $form->field($model, 'diagnosi')->textInput(['maxlength' => true]) ?>

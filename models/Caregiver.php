@@ -116,4 +116,8 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
     {
         return $this->getAuthKey() === $authKey;
     }
+
+    public function getNomeECognome(){
+        return $this->nome.' '.$this->cognome;
+    }
 }

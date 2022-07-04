@@ -98,4 +98,8 @@ class Paziente extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Sessione::className(), ['idSessione' => 'sessione'])->viaTable('assegnazionesessione', ['paziente' => 'idPaziente']);
     }
+
+    public function getNomeECognome(){
+        return $this->nome.' '.$this->cognome;
+    }
 }

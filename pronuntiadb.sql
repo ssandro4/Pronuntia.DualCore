@@ -134,4 +134,9 @@ insert into sessione values
 insert into assegnazioneSessione (sessione,paziente) value
 ('mimmone',1);
 select*from assegnazionesessione;
-select* from eserciziogat;
+
+insert into composizionesessione values
+('mimmone','canemp3'),
+('ginetto','canemp3'),
+('mimmone','gattone');
+select* from composizionesessione;

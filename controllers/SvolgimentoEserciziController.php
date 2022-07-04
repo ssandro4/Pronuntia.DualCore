@@ -20,10 +20,12 @@ class SvolgimentoEserciziController extends \yii\web\Controller
         $model = $this->findAssegnazioneSessione($sessione, $paziente);
         $esercizi = $model->getSessione0()->one()->getEsercizios()->all();
         foreach($esercizi as $esercizio){
-            $model = $this->findEsercizio($esercizio);
-      return  $this->svolgiEsercizio($model);
+            //echo $esercizio->idEsercizio;
+           $model = $this->findEsercizio($esercizio);
+           echo $this->render('svolgi-esercizio', ['esercizio'=> $model]);
+     // echo $this->svolgiEsercizio($model);
         }
-
+    }
 
 
 
@@ -38,10 +40,11 @@ $sessioneAssegnata->listaSbagliate += $esercizio->parola // e magari punto e a c
 $sessioneAssegnata->esito = 'ha sbagliato ' . $sessioneAssegnata->cntSbagliate . ' parole, ovvero: ' . $$sessioneAssegnata->listaSbagliate;
 $sessioneAssegnata->save();*/
      //   return $this->render('svolgi-sessione', ['model'=> $esercizio]);
-    }
+   
 
     protected function svolgiEsercizio($esercizio){
-        return $this->render('svolgi-sessione', ['esercizio'=> $esercizio]);
+        
+        echo $this->render('svolgi-esercizio', ['esercizio'=> $esercizio]);
     }
 
     protected function findAssegnazioneSessione($sessione, $paziente)

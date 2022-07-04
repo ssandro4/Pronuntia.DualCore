@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'dataCreazione',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Assegnazionesessione $model, $key, $index, $column) {
+                'urlCreator' => function ($action, $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'sessione' => $model->sessione, 'paziente' => $model->paziente]);
                  }
             ],

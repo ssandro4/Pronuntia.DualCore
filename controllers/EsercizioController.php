@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Yii;
 use app\models\Esercizio;
 use app\models\EsercizioSearch;
 use yii\web\Controller;
@@ -67,8 +68,12 @@ class EsercizioController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Esercizio();
 
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        $model = new Esercizio();
+        $model->logopedista=Yii::$app->user->identity->idLogopedista;
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'idEsercizio' => $model->idEsercizio]);
@@ -76,6 +81,7 @@ class EsercizioController extends Controller
         } else {
             $model->loadDefaultValues();
         }
+
 
         return $this->render('create', [
             'model' => $model,

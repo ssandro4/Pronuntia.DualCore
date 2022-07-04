@@ -6,12 +6,10 @@ use Yii;
 use app\models\Sessione;
 use app\models\SessioneSearch;
 use app\models\Composizionesessione;
-use app\models\ComposizionesessioneSearch;
 use app\controllers\ComposizionesessioneController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
 
 /**
  * SessioneController implements the CRUD actions for Sessione model.
@@ -43,6 +41,7 @@ class SessioneController extends Controller
      */
     public function actionIndex()
     {
+        
         $searchModel = new SessioneSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -60,13 +59,8 @@ class SessioneController extends Controller
      */
     public function actionView($idSessione)
     {
-        $searchModel = new ComposizionesessioneSearch();
-       // $dataProvider = $searchModel->search($this->request->queryParams);
-       $dataProvider = $searchModel->searchBySessione($idSessione);
-
-        return $this->render('composizione', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+        return $this->render('view', [
+            'model' => $this->findModel($idSessione),
         ]);
     }
 
@@ -78,7 +72,7 @@ class SessioneController extends Controller
     public function actionCreate()
     {
         $model1 = new Sessione();
-        $model1->logopedista=Yii::$app->user->identity->idLogopedista;
+
         if ($this->request->isPost) {
             if ($model1->load($this->request->post()) && $model1->save()) {
                 if (!Sessione::findOne('idSessione' == $model1->idSessione)->getComposizionesessiones()->all())
@@ -143,4 +137,5 @@ class SessioneController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

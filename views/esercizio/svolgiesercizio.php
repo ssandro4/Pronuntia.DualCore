@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\models\Esercizio;
@@ -6,122 +7,77 @@ use app\models\Parola;
 use app\models\Assegnazionesessione;
 use app\models\Sessione;
 use app\models\Composizionesessione;
+use views\esercizio\_esercizioAudio;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Esercizio */
 
-$img=Parola::findOne(['idParola'=>$esercizio->parola])->pathIMG;
-$img2=Parola::findOne(['idParola'=>$esercizio->parola2])->pathIMG;
-$id=Parola::findOne(['idParola'=>$esercizio->parola])->idParola;
-$id2=Parola::findOne(['idParola'=>$esercizio->parola2])->idParola;
-$rand= rand(0,999);
-$sound=Parola::findOne(['idParola'=>$esercizio->parola])->pathMP3;
-//$note=Assegnazionesessione::findOne(['note'=>$esercizio->Assegnazionesessione])->note;
 ?>
 
 <style>
-.center
-{
-margin: 30 auto;
-margin-left: auto;
-margin-right: auto;
-text-align:center;
-}
+    .center {
+        margin: 30 auto;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
 </style>
 
 
-            <div class="card bg-secondary mb-3" style="max-width: 40rem; margin-left: auto;
+<div class="card bg-secondary mb-3" style="max-width: 40rem; margin-left: auto;
             margin-right: auto;  border-radius: 12px;    border: 5px solid black; ">
 
-                <div class ="center">
+    <div class="center">
 
-            <?php if($esercizio->tipo == 'Audio') : ?>
-                AUDIO    <div>
-                <p>Clicca play per riprodurre l'audio</p>
-                    <audio src=<?php echo " $sound " ?> controls>
-                    </div>
-            <?php elseif($esercizio->tipo == 'Immagine') : ?>
-                IMMAGINE    <div>
-                <img src= <?php echo " $img " ?>,
-                        alt=<?php echo "$id" ?>, 
-                        width="300" ,
-                        height="300"; style="border-radius: 12px;  border: 5px solid black;"
-                        >
-                </div>    </div>
-            <?php elseif($esercizio->tipo == 'Coppia Minima') : ?>
-            COPPIA
-                <div>
-                            <?php if($rand % 2 == 0) : ?>
+        <?php if ($esercizio->tipo == 'Audio') : ?>
+            <div>
+                <?php echo $this->render('_esercizioAudio', ['esercizio' => $esercizio]); ?>
+            </div>
 
-                            <img src= <?php echo " $img " ?>,
-                                    alt=<?php echo "$id" ?>, 
-                                    width="300" ,
-                                    height="300"; style="border-radius: 12px;  border: 5px solid black;"
-                                    >
-                            <img src= <?php echo " $img2 " ?>,
-                                    alt=<?php echo "$id2" ?>, 
-                                    width="300" ,
-                                    height="300"; style="border-radius: 12px;  border: 5px solid black;"
-                                    >
-                            </div>
+        <?php elseif ($esercizio->tipo == 'Immagine') : ?>
+            <div>
+                <?php echo $this->render('_esercizioImmagine', ['esercizio' => $esercizio]); ?>
+            </div>
 
-                            <?php else : ?>
+        <?php elseif ($esercizio->tipo == 'Coppia Minima') : ?>
+            <div>
+                <?php echo $this->render('_esercizioCoppia', ['esercizio' => $esercizio]); ?>
+            </div>
 
-                            <img src= <?php echo " $img2 " ?>,
-                                    alt=<?php echo "$id2" ?>, 
-                                    width="300" ,
-                                    height="300"; style="border-radius: 12px;  border: 5px solid black;"
-                                    >
-                            <img src= <?php echo " $img " ?>,
-                                    alt=<?php echo "$id" ?>, 
-                                    width="300" ,
-                                    height="300"; style="border-radius: 12px;  border: 5px solid black;"
-                                    >
-                            </div>
-                            <div>
-                            La parola giusta e' (<?php echo "$id" ?>)
-                        <div>
-                            <audio controls="controls">
-                        <source src="<?php echo"$sound"?>"  type="audio/mp3">
-                        </audio>
-                        </div>      
-                        </div>   
-
-
-                        </div>     
-
-            
-                            <?php endif; ?>
-
-
-            <?php else : ?>
+        <?php else : ?>
             Nothing
-            <?php endif; ?>
+        <?php endif; ?>
 
-            <div class ="center">
+        <div class="center">
+
+        </div>
+
+        <div class="center">
+
             <form action="/action_page.php">
-            <label for="fname">Nota</label>
-            
-            <div class ="center">
-            <input type="text" id="fname" name="fname" ><br><br>
-            </div>
-            </form>
-            </div>
-            
-            <div class ="center">
-            <button type="button" style="width: 90px; border-radius: 9px; background-color: #b7e2a1; border: 2px solid black;" 
-            onclick="alert('bla bla esito positivo')"
-            >Bene! </button>
 
-                <button type="button" style="width: 90px; border-radius: 9px; background-color: #ff6666; border: 2px solid black;"
-                onclick="alert('bla bla esito negativo')"
-                >Male!</button>
+                <div>
+                    <p>Che valutazione daresti?</p>
+                    <input type="radio" id="Bene" name="contaerrori" value="bene " style="  height: 25px; width: 25px;">
+                    <label for="html"><h4>Positiva!</h4></label>
+                    <input type="radio" id="Male" name="contaerrori" value="male" style="  height: 25px; width: 25px;">
+                    <label for="css"><h4>Negativa!</h4></label><br>
                 </div>
 
-                    <div class ="center">
-                    <button type="button" style="width: 90px; border-radius: 9px; background-color: #3399ff; border: 2px solid black;" 
-                            >Avanti! </button>
-                            </div>
+        </div>
+    </div>
+</div>
 
-                </div>
+
+<div class="card bg-secondary mb-3" style="max-width: 40rem; margin-left: auto;
+            margin-right: auto;  border-radius: 12px;    border: 5px solid black; ">
+    <div class="center">
+        <form action="/action_page.php">
+            <h4>Nota</h4>
+            <div class="center">
+                <input type="text" id="fname" name="fname"><br><br>
             </div>
+        </form>
+        <button type="button" style="width: 90px; border-radius: 9px; background-color: #3399ff; border: 2px solid black;" onclick="alert('bla bla')">Avanti! </button>
+    </div>
+</div>

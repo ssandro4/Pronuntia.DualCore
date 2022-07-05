@@ -16,12 +16,14 @@ use app\models\Esercizio;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'sessione')
-      ->dropDownList(ArrayHelper::map(Sessione::find()->where(['logopedista'=>Yii::$app->user->identity->idLogopedista])->all(),'idSessione','idSessione'))
- ?>
- <?= $form->field($model, 'esercizio')
-      ->dropDownList(ArrayHelper::map(Esercizio::find()->where(['logopedista'=>Yii::$app->user->identity->idLogopedista])->all(),'idEsercizio','idEsercizio'))
- ?>
+    <?php 
+    $esercizi=array();
+    for ($k = 0; $k < sizeof($arrModels); $k++) {
+        $model = $arrModels[$k];
+
+        echo $form->field($model, '['.$k.']esercizio')->dropDownList(ArrayHelper::map(Esercizio::find()->where(['logopedista' => Yii::$app->user->identity->idLogopedista])->all(), 'idEsercizio', 'idEsercizio'));
+    }
+    ?>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

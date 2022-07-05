@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\bootstrap4\Modal;
-use yii\models\Composizionesessione;
+use app\models\Composizionesessione;
 /* @var $this yii\web\View */
 /* @var $model app\models\Sessione */
 

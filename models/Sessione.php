@@ -9,6 +9,7 @@ use Yii;
  *
  * @property string $idSessione
  * @property int $logopedista
+ * @property int $numEsercizi
  *
  * @property Assegnazionesessione[] $assegnazionesessiones
  * @property Composizionesessione[] $composizionesessiones
@@ -32,8 +33,8 @@ class Sessione extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idSessione', 'logopedista'], 'required'],
-            [['logopedista'], 'integer'],
+            [['idSessione', 'logopedista', 'numEsercizi'], 'required'],
+            [['logopedista', 'numEsercizi'], 'integer'],
             [['idSessione'], 'string', 'max' => 24],
             [['idSessione'], 'unique'],
             [['logopedista'], 'exist', 'skipOnError' => true, 'targetClass' => Logopedista::className(), 'targetAttribute' => ['logopedista' => 'idLogopedista']],
@@ -48,6 +49,7 @@ class Sessione extends \yii\db\ActiveRecord
         return [
             'idSessione' => 'Id Sessione',
             'logopedista' => 'Logopedista',
+            'numEsercizi' => 'Num Esercizi',
         ];
     }
 

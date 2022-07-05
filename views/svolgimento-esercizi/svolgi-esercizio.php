@@ -98,8 +98,10 @@ $sound = Parola::findOne(['idParola' => $esercizio->parola])->pathMP3;
 </div>
 
 <div class="center">
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin();?>
     <div class="form-group">
+        
+        <?= Html::input('text', 'scrivi qua', $var) ?>
         <?= Html::submitButton('Avanti!', ['class' => 'btn btn-success']) ?>
     </div>
 

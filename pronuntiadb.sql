@@ -66,6 +66,7 @@ CREATE TABLE Esercizio (
 CREATE TABLE Sessione (
     idSessione VARCHAR(24) PRIMARY KEY,
     logopedista int not null,
+    numEsercizi int not null,
      FOREIGN KEY (logopedista)
         REFERENCES Logopedista (idLogopedista)
 );
@@ -128,9 +129,9 @@ insert into esercizio (idesercizio, parola, tipo, logopedista) values
 ('cono-immagine','cono','Immagine',1001),
 ('gattone', 'gatto','Audio',1001);
 insert into sessione values
-('mimmone',1001),
-('ginetto',1001),
-('pinuccio',1001);
+('mimmone',1001,2),
+('ginetto',1001,1),
+('pinuccio',1001,2);
 insert into assegnazioneSessione (sessione,paziente) value
 ('mimmone',1);
 select*from assegnazionesessione;
@@ -140,3 +141,8 @@ insert into composizionesessione values
 ('ginetto','canemp3'),
 ('mimmone','gattone');
 select* from composizionesessione;
+insert into composizionesessione value
+('pinuccio','cono-immagine');
+insert into esercizio (idesercizio, parola, tipo, logopedista) values
+('caneimmagine','cane','Immagine',1001);
+insert into composizionesessione value ('pinuccio','caneimmagine');

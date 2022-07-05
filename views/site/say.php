@@ -8,6 +8,13 @@ use app\models\Paziente;
 use app\models\Sessione;
 ?>
 
+
+<?= Html::beginForm(['gestione-esercizi/aggiungi-parola'], 'post', ['enctype' =>
+'multipart/form-data']) ?>
+<?= Html::submitButton('Submit', ['class' => 'submit']) ?>
+<?= Html::endForm() ?>
+
+
 <?php
 $msg = Sessione::findOne('idSessione' == 'oipougytfdrf')->getComposizionesessiones()->all();
 if (Sessione::findOne('idSessione' == 'gianni')->getComposizionesessiones()->all())

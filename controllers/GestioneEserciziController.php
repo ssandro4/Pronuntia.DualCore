@@ -57,7 +57,7 @@ class GestioneEserciziController extends \yii\web\Controller
         ]);
     }
 
-    
+
     public function actionCreaEsercizio()
     {
         $model = new Esercizio();
@@ -95,13 +95,12 @@ class GestioneEserciziController extends \yii\web\Controller
     public function actionCreaSessione() //e componila
     {
         $model1 = new Sessione();
-        $model1->logopedista=Yii::$app->user->identity->idLogopedista;
+        $model1->logopedista = Yii::$app->user->identity->idLogopedista;
         if ($this->request->isPost) {
             if ($model1->load($this->request->post()) && $model1->save()) {
-                if (!Sessione::findOne('idSessione' == $model1->idSessione)->getComposizionesessiones()->all())
-                return $this->actionComponiSessione($model1->idSessione);
-                //return Yii::$app->runAction('componi-sessione', ['sessione'=>$model1->idSessione]);
-            return $this->redirect(['view', 'idSessione' => $model1->idSessione]);
+                    //  return $this->actionComponiSessione($model1->idSessione);
+                    return $this->redirect(['componi-sessione', 'sessione' => $model1->idSessione]);
+                //return $this->redirect(['view', 'idSessione' => $model1->idSessione]);
             }
         } else {
             $model1->loadDefaultValues();
@@ -110,25 +109,31 @@ class GestioneEserciziController extends \yii\web\Controller
         return $this->render('crea-sessione', [
             'model' => $model1,
         ]);
-    }   
+    }
 
     public function actionComponiSessione($sessione)
     {
-        $model = new Composizionesessione();
-        $model->sessione = $sessione;
-        
+        $numEsercizi = $this->findSessione($sessione)->numEsercizi;
+        $arrModels = array();
+        for ($k = 0; $k < $numEsercizi; $k++) {
+            $model = new Composizionesessione();
+            $model->sessione = $sessione;
+            $arrModels[] = $model;
+        }
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'sessione' => $model->sessione, 'esercizio' => $model->esercizio]);
+            for ($k = 0; $k < $numEsercizi; $k++) {
+                $arrModels[$k]->esercizio = $_POST['Composizionesessione'][$k]['esercizio']; //$_POST['esercizi' . $k];//     
+                $arrModels[$k]->save();
+                
             }
+            return $this->redirect(['index']);
         } else {
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
-            'model' => $model,
+        return $this->render('componi-sessione', [
+            'arrModels' => $arrModels,
         ]);
-    
     }
 
     public function actionAssegnaSessione()
@@ -147,7 +152,7 @@ class GestioneEserciziController extends \yii\web\Controller
             'model' => $model,
         ]);
     }
-    
+
 
     public function actionIndex()
     {
@@ -169,7 +174,7 @@ class GestioneEserciziController extends \yii\web\Controller
 
     public function actionViewEsercizi()
     {
-        
+
         $searchModel = new EsercizioSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -184,15 +189,23 @@ class GestioneEserciziController extends \yii\web\Controller
         $searchModel = new ComposizionesessioneSearch();
         // $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider = $searchModel->searchBySessione($idSessione);
- 
-         return $this->render('composizione', [
-             'searchModel' => $searchModel,
-             'dataProvider' => $dataProvider,
-         ]);
+
+        return $this->render('view-sessione', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
     protected function findParola($idParola)
     {
         if (($model = Parola::findOne(['idParola' => $idParola])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    protected function findSessione($idSessione)
+    {
+        if (($model = Sessione::findOne(['idSessione' => $idSessione])) !== null) {
             return $model;
         }
 

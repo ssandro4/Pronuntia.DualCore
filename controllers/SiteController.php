@@ -156,6 +156,7 @@ class SiteController extends Controller
     
     public function actionSay()
     {
+        
         return $this->render('say');
     }
 

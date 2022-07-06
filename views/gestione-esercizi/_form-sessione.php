@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'idSessione')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'numEsercizi')->textInput() ?>
+    <?= $form->field($model, 'numEsercizi')->textInput(['type'=>'number','min'=>1, 'max'=>20]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

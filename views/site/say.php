@@ -6,8 +6,10 @@ use app\models\Logopedista;
 use app\models\Parola;
 use app\models\Paziente;
 use app\models\Sessione;
+use yii\helpers\ArrayHelper;
 ?>
 
+<?php echo Html::radioList('roles',false, [16, 42]);//, ArrayHelper::map($roleModels, 'idLogopedista','nome')) ?>
 
 <?= Html::beginForm(['gestione-esercizi/aggiungi-parola'], 'post', ['enctype' =>
 'multipart/form-data']) ?>

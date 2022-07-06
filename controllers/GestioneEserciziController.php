@@ -122,7 +122,7 @@ class GestioneEserciziController extends \yii\web\Controller
         }
         if ($this->request->isPost) {
             for ($k = 0; $k < $numEsercizi; $k++) {
-                $arrModels[$k]->esercizio = $_POST['Composizionesessione'][$k]['esercizio']; //$_POST['esercizi' . $k];//     
+                $arrModels[$k]->esercizio = $_POST['Composizionesessione'][$k]['esercizio'];
                 $arrModels[$k]->save();
                 
             }

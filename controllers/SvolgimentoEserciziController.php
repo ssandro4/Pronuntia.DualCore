@@ -7,6 +7,7 @@ use app\models\Esercizio;
 use app\models\Sessione;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
+use app\models\Paziente;
 
 class SvolgimentoEserciziController extends \yii\web\Controller
 {
@@ -19,15 +20,35 @@ class SvolgimentoEserciziController extends \yii\web\Controller
     {
         $model = $this->findAssegnazioneSessione($sessione, $paziente);
         $esercizi = $model->getSessione0()->one()->getEsercizios()->all();
-        foreach ($esercizi as $esercizio) {
-          
-                //echo $esercizio->idEsercizio;
-                
-                $model = $this->findEsercizio($esercizio);
-                // echo $this->svolgiEsercizio('svolgi-esercizio', ['esercizio'=> $model]);
-                return $this->svolgiEsercizio($model);
-           
+        $parole = array();
+        for ($k = 0; $k < sizeof($esercizi); $k++) {
+            $parole[$k] = Esercizio::findOne(['idEsercizio' => $esercizi[$k]->idEsercizio])->parola;
         }
+        if ($this->request->isPost) {
+            $model->load($this->request->post());
+            $model->elencoErrori = '';
+            $model->cntErrori=0;
+            for ($k = 0; $k < sizeof($esercizi); $k++) {
+                if ($_POST['esiti'][$k] == 1) {
+                    $model->cntErrori++;
+                    $model->elencoErrori .= $parole[$k] . '<br />';
+                }
+            }
+            $model->esito = 'Il paziente '.Paziente::findOne(['idPaziente' => $paziente])->getNomeECognome().' in '.sizeof($esercizi).'
+            esercizi ha avuto difficoltà con '.$model->cntErrori.' parole, ovvero: '.$model->elencoErrori;
+            if($model->save()){
+                $model->nuovo=false;
+                $model->save();
+            }
+            return $this->render('assegnazionesessione/view',['sessione'=>$sessione,'paziente'=>$paziente]);
+            //return $this->redirect(['index']);
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('svolgiesercizio', [
+            'esercizi' => $esercizi, 'model' => $model
+        ]);
     }
 
 
@@ -45,11 +66,28 @@ $sessioneAssegnata->save();*/
     //   return $this->render('svolgi-sessione', ['model'=> $esercizio]);
 
 
-    protected function svolgiEsercizio($esercizio)
+    protected function svolgiEsercizio($sessione)
     {
-        $var = '';
-        echo $this->render('svolgi-esercizio', ['esercizio' => $esercizio, 'var' => $var]);
-        return $var;
+        $numEsercizi = $this->findSessione($sessione)->getEsercizios()->all();
+        $arrModels = array();
+        for ($k = 0; $k < $numEsercizi; $k++) {
+            $model = new Composizionesessione();
+            $model->sessione = $sessione;
+            $arrModels[] = $model;
+        }
+        if ($this->request->isPost) {
+            for ($k = 0; $k < $numEsercizi; $k++) {
+                $arrModels[$k]->esercizio = $_POST['Composizionesessione'][$k]['esercizio']; //$_POST['esercizi' . $k];//     
+                $arrModels[$k]->save();
+            }
+            return $this->redirect(['index']);
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('componi-sessione', [
+            'arrModels' => $arrModels,
+        ]);
     }
 
     protected function findAssegnazioneSessione($sessione, $paziente)

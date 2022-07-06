@@ -104,8 +104,9 @@ parola2 varchar(24),
 FOREIGN KEY (parola1) references Parola(idParola),
 FOREIGN KEY (parola2) references Parola(idParola));
 */
-insert into Logopedista value
-(1001,"Mario","Rossi", "mar.rosso@libero.it","LogoLoco","test200key","200-token");
+insert into Logopedista values
+(1001,"Mario","Rossi", "mar.rosso@libero.it","LogoLoco","test200key","200-token"),
+(1002,"Giovanni","Bianchi", "gio.bianchi@libero.it","password1","test201key","201-token");
 
 insert into Caregiver (nome,cognome,email,password,authKey,accessToken) values
 ("Giovanni","Marroni", "giov.mar@gmail.com","Ketchup3Maionese","test100key","100-token"),
@@ -117,32 +118,28 @@ FROM
 
 insert into Paziente value
 (1,"Pino","Pini","dislessia, discalculia",1,1001, true);
-insert into parola (idparola) values
-("cane"),
-("serpente"),
-("cono"),
-("gatto");
+insert into parola (idparola, pathIMG) values
+("Cane",'http://www.veterinarimatera.it/wp-content/uploads/2021/03/cane-1.jpg'),
+("Serpente",'https://as2.ftcdn.net/v2/jpg/00/46/08/69/1000_F_46086991_yOEe4Zbqdt6K8eOR9vUGkR3M40NPHBQ5.jpg'),
+("Cono",'https://previews.123rf.com/images/jiripravda/jiripravda1208/jiripravda120800012/14788432-traffico-cono-arancione.jpg'),
+("Gatto",'https://www.helvetia.com/it/web/it/chi-siamo/blog/Assicurazione/animali/assicurazione-gatto/_jcr_content/storyparsys-01/storystage_copy_1249/image.1645114768564.transform-fp/960x540/assicurazione-gatto.jpg');
 
 
 insert into esercizio (idesercizio, parola, tipo, logopedista) values
-('canemp3','cane','Audio',1001),
-('cono-immagine','cono','Immagine',1001),
-('gattone', 'gatto','Audio',1001);
+('cane-audio','Cane','Audio',1001),
+('cono-immagine','Cono','Immagine',1001),
+('gatto-immagine', 'Gatto','Immagine',1001),
+('cane-immagine','Cane','Immagine',1001);
 insert into sessione values
-('mimmone',1001,2),
-('ginetto',1001,1),
-('pinuccio',1001,2);
+('Sessione1',1001,2),
+('Sessione2',1001,1),
+('Sessione3',1001,2);
 insert into assegnazioneSessione (sessione,paziente) value
-('mimmone',1);
-select*from assegnazionesessione;
+('Sessione1',1);
 
 insert into composizionesessione values
-('mimmone','canemp3'),
-('ginetto','canemp3'),
-('mimmone','gattone');
-select* from composizionesessione;
-insert into composizionesessione value
-('pinuccio','cono-immagine');
-insert into esercizio (idesercizio, parola, tipo, logopedista) values
-('caneimmagine','cane','Immagine',1001);
-insert into composizionesessione value ('pinuccio','caneimmagine');
+('Sessione1','cane-audio'),
+('Sessione2','cane-audio'),
+('Sessione1','gatto-immagine'),
+('Sessione3','cono-immagine'),
+('Sessione3','cane-immagine');

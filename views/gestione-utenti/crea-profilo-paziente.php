@@ -16,5 +16,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_form-paziente', [
         'model' => $model,
     ]) ?>
-
+<p><p><a href="crea-profilo-caregiver-popup">Registra un nuovo caregiver</a></p>
 </div>

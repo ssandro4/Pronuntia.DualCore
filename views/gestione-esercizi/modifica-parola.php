@@ -17,15 +17,15 @@ $this->params['breadcrumbs'][] = 'Update';
         height: 90x;
 
     }
-    </style>
+</style>
 
 <div class="parola-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    
+
     <div class="box">
-    <?= $this->render('_form-modifica-parola', [
-        'model' => $model,
-    ]) ?>
-</div>
+        <?= $this->render('_form-modifica-parola', [
+            'model' => $model,
+        ]) ?>
+    </div>
 </div>

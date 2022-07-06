@@ -12,6 +12,7 @@ use app\models\Esercizio;
 use app\models\EsercizioSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\helpers\Url;
 
 class GestioneEserciziController extends \yii\web\Controller
 {
@@ -46,7 +47,7 @@ class GestioneEserciziController extends \yii\web\Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->refresh();
+                return $this->redirect('Url::previous()');
             }
         } else {
             $model->loadDefaultValues();
@@ -61,7 +62,8 @@ class GestioneEserciziController extends \yii\web\Controller
     public function actionCreaEsercizio()
     {
         $model = new Esercizio();
-        $model->logopedista=Yii::$app->user->identity->idLogopedista;
+        $model->logopedista = Yii::$app->user->identity->idLogopedista;
+        Url::remember();
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->refresh();
@@ -78,16 +80,16 @@ class GestioneEserciziController extends \yii\web\Controller
     public function actionCreaEsercizioPopup()
     {
         $model = new Esercizio();
-        $model->logopedista=Yii::$app->user->identity->idLogopedista;
+        $model->logopedista = Yii::$app->user->identity->idLogopedista;
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->refresh();
+                return $this->redirect(Url::previous());
             }
         } else {
             $model->loadDefaultValues();
         }
 
-        return $this->render('crea-esercizio', [
+        return $this->render('crea-esercizio-popup', [
             'model' => $model,
         ]);
     }
@@ -98,8 +100,8 @@ class GestioneEserciziController extends \yii\web\Controller
         $model1->logopedista = Yii::$app->user->identity->idLogopedista;
         if ($this->request->isPost) {
             if ($model1->load($this->request->post()) && $model1->save()) {
-                    //  return $this->actionComponiSessione($model1->idSessione);
-                    return $this->redirect(['componi-sessione', 'sessione' => $model1->idSessione]);
+                //  return $this->actionComponiSessione($model1->idSessione);
+                return $this->redirect(['componi-sessione', 'sessione' => $model1->idSessione]);
                 //return $this->redirect(['view', 'idSessione' => $model1->idSessione]);
             }
         } else {
@@ -120,13 +122,14 @@ class GestioneEserciziController extends \yii\web\Controller
             $model->sessione = $sessione;
             $arrModels[] = $model;
         }
+        Url::remember();
         if ($this->request->isPost) {
+
             for ($k = 0; $k < $numEsercizi; $k++) {
                 $arrModels[$k]->esercizio = $_POST['Composizionesessione'][$k]['esercizio'];
                 $arrModels[$k]->save();
-                
             }
-            return $this->redirect(['index']);
+            return $this->render('request-assegnazione', ['sessione' => $sessione]);
         } else {
             $model->loadDefaultValues();
         }
@@ -136,10 +139,11 @@ class GestioneEserciziController extends \yii\web\Controller
         ]);
     }
 
-    public function actionAssegnaSessione()
+
+    public function actionAssegnaSessione($sessione = null)
     {
         $model = new Assegnazionesessione();
-
+        $model->sessione = $sessione;
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'sessione' => $model->sessione, 'paziente' => $model->paziente]);

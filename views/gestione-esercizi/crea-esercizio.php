@@ -16,5 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_form-esercizio', [
         'model' => $model,
     ]) ?>
+    
+<p><a href="aggiungi-parola-popup">Aggiungi una nuova parola</a></p>
+
 
 </div>

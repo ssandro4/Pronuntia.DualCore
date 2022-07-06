@@ -6,6 +6,7 @@ use Yii;
 use app\models\Caregiver;
 use app\models\Paziente;
 use yii\web\NotFoundHttpException;
+use yii\helpers\Url;
 
 
 class GestioneUtentiController extends \yii\web\Controller
@@ -29,12 +30,32 @@ class GestioneUtentiController extends \yii\web\Controller
             'model' => $model,
         ]);
         }
-
+        public function actionCreaProfiloCaregiverPopup()
+        {
+            if (Yii::$app->user->isGuest) {
+                return $this->goHome();
+            }
+            $model = new Caregiver();
+    
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                //    return $this->redirect(['view-profilo-caregiver', 'idCaregiver' => $model->idCaregiver]);
+                return $this->redirect(Url::previous());}
+            } else {
+                $model->loadDefaultValues();
+            }
+    
+            return $this->render('crea-profilo-caregiver', [
+                'model' => $model,
+            ]);
+            }
+    
     public function actionCreaProfiloPaziente()
     {
         if (Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+        Url::remember();
         $model = new Paziente();
         $model->logopedista=Yii::$app->user->identity->idLogopedista;
         if ($this->request->isPost) {

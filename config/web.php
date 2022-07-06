@@ -2,7 +2,6 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-$user = \Yii::$app->user;  
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),

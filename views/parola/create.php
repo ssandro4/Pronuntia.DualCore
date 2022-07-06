@@ -11,6 +11,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="parola-create">
 
+<div class="tooltip">Hover over me
+  <span class="tooltiptext">Tooltip text</span>
+</div>
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [

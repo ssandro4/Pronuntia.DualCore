@@ -9,10 +9,12 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="parola-form">
-
+    
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'idParola')->textInput(['maxlength' => true]) ?>
+    <div title="L'Id della parola equivale alla parola stessa, quindi non scrivere cazzate" class="visible" s>
+    <?= $form->field($model, 'idParola')->textInput(['maxlength' => true])->label('Parola')  ?>
+    </div>
 
     <?= $form->field($model, 'tag')->textInput(['maxlength' => true]) ?>
 

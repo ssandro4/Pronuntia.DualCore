@@ -10,12 +10,22 @@ $this->params['breadcrumbs'][] = ['label' => 'Parolas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->idParola, 'url' => ['view', 'idParola' => $model->idParola]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
+<style>
+    .box {
+        font-size: 20px;
+        width: 300px;
+        height: 90x;
+
+    }
+    </style>
+
 <div class="parola-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
+    
+    <div class="box">
+    <?= $this->render('_form-modifica-parola', [
         'model' => $model,
     ]) ?>
-
+</div>
 </div>

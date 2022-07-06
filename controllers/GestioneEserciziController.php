@@ -61,7 +61,7 @@ class GestioneEserciziController extends \yii\web\Controller
     public function actionCreaEsercizio()
     {
         $model = new Esercizio();
-
+        $model->logopedista=Yii::$app->user->identity->idLogopedista;
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->refresh();
@@ -78,7 +78,7 @@ class GestioneEserciziController extends \yii\web\Controller
     public function actionCreaEsercizioPopup()
     {
         $model = new Esercizio();
-
+        $model->logopedista=Yii::$app->user->identity->idLogopedista;
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->refresh();

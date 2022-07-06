@@ -22,6 +22,18 @@ use yii\widgets\ActiveForm;
         margin-right: auto;
         text-align: center;
     }
+
+    .bigfont {
+        font-size: 20px;
+    }
+
+    input[type=radio] {
+    border: 0px;
+    width: 100%;
+    height: 2em;
+    
+    background-color: #d1d3d1;
+}
 </style>
 <?php
 
@@ -56,43 +68,34 @@ $form = ActiveForm::begin();
 
             </div>
 
-            <div class="center">
+            <div class="bigfont">
+                <p>Che valutazione daresti?</p>
 
-                
-
-                    <div>
-                        <p>Che valutazione daresti?</p>
-                      
-
-                        <?php echo Html::radioList('esiti['.$k.']',false,  [false=>'Bene', true=>'Male']) ?>
-                        <input type="radio" id="Bene" name='contaerrori' .'$k' value="bene " style="  height: 25px; width: 25px;">
-                        <label for="html">
-                            <h4>Positiva!</h4>
-                        </label>
-                        <input type="radio" id="Male" name="contaerrori" .'$k' value="male" style="  height: 25px; width: 25px;">
-                        <label for="css">
-                            <h4>Negativa!</h4>
-                        </label><br>
-                    </div>
+                <div class="biggertext">
+                    <?php echo Html::radioList('esiti[' . $k . ']', false,  [false => 'Positiva', true => 'Negativa'], ['separator' => '', 'tabindex' => 2,]) ?>
+                </div>
 
             </div>
         </div>
     </div>
 <?php endfor; ?>
 
-<div class="card bg-secondary mb-3" style="max-width: 40rem; margin-left: auto;
+<div class="center">
+    <div class="card bg-secondary mb-3" style="max-width: 40rem; margin-left: auto;
             margin-right: auto;  border-radius: 12px;    border: 5px solid black; ">
-    <div class="center">
-        <form action="/action_page.php">
-            <h4>Nota</h4>
-            <div class="center">
-                <input type="text" id="fname" name="fname"><br><br>
+        <div class="center">
+            <form action="/action_page.php">
+                <h4>Nota</h4>
 
                 <?php echo Html::activeTextarea($model, 'note') ?>
-            </div>
+        </div>
         </form>
-        <button type="submit" style="width: 90px; border-radius: 9px; background-color: #3399ff; border: 2px solid black;" onclick="alert('bla bla')">Avanti! </button>
+        <div class="center">
+            <button type="submit" style="width: 90px; border-radius: 9px; background-color:
+     #3399ff; border: 2px solid black;" onclick="alert('bla bla')">Avanti! </button>
+        </div>
+        <!-- < ?=Html::submitButton('Submit', ['class'=> 'submit'], ) ?> -->
     </div>
 </div>
-<?= Html::submitButton('Submit', ['class' => 'submit']) ?>
+</div>
 <?php $form->end(); ?>

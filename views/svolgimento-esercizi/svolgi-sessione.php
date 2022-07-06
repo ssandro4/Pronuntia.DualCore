@@ -97,7 +97,7 @@ text-align:center;
             <?php else : ?>
             Nothing
             <?php endif; ?>
-
+        
             <div class ="center">
             <form action="/action_page.php">
             <label for="fname">Nota</label>
@@ -108,6 +108,7 @@ text-align:center;
             </form>
             </div>
             
+
             <div class ="center">
             <button type="button" style="width: 90px; border-radius: 9px; background-color: #b7e2a1; border: 2px solid black;" 
             onclick="alert('bla bla esito positivo')"
@@ -123,5 +124,5 @@ text-align:center;
                             >Avanti! </button>
                             </div>
 
-                </div>
+                </div>            
             </div>

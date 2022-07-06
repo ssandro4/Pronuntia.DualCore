@@ -8,6 +8,7 @@ use app\models\Sessione;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use app\models\Paziente;
+use app\models\Composizionesessione;
 
 class SvolgimentoEserciziController extends \yii\web\Controller
 {
@@ -37,7 +38,7 @@ class SvolgimentoEserciziController extends \yii\web\Controller
             $model->esito = 'Il paziente '.Paziente::findOne(['idPaziente' => $paziente])->getNomeECognome().' in '.sizeof($esercizi).'
             esercizi ha avuto difficoltà con '.$model->cntErrori.' parole, ovvero: '.$model->elencoErrori;
             if($model->save()){
-                $model->nuovo=false;
+                $model->nuovo=0;
                 $model->save();
             }
             return $this->render('assegnazionesessione/view',['sessione'=>$sessione,'paziente'=>$paziente]);

@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\models\Esercizio;
@@ -6,123 +7,95 @@ use app\models\Parola;
 use app\models\Assegnazionesessione;
 use app\models\Sessione;
 use app\models\Composizionesessione;
+use views\esercizio\_esercizioAudio;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Esercizio */
 
-$img=Parola::findOne(['idParola'=>$esercizio->parola])->pathIMG;
-$img2=Parola::findOne(['idParola'=>$esercizio->parola2])->pathIMG;
-$id=Parola::findOne(['idParola'=>$esercizio->parola])->idParola;
-$id2=Parola::findOne(['idParola'=>$esercizio->parola2])->idParola;
-$rand= rand(0,999);
-$sound=Parola::findOne(['idParola'=>$esercizio->parola])->pathMP3;
-//$note=Assegnazionesessione::findOne(['note'=>$esercizio->Assegnazionesessione])->note;
 ?>
 
 <style>
-.center
-{
-margin: 30 auto;
-margin-left: auto;
-margin-right: auto;
-text-align:center;
+    .center {
+        margin: 30 auto;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+
+    .bigfont {
+        font-size: 20px;
+    }
+
+    input[type=radio] {
+    border: 0px;
+    width: 100%;
+    height: 2em;
+    
+    background-color: #d1d3d1;
 }
 </style>
+<?php
 
-
-            <div class="card bg-secondary mb-3" style="max-width: 40rem; margin-left: auto;
+$form = ActiveForm::begin();
+?>
+<?php for ($k = 0; $k < sizeof($esercizi); $k++) : ?>
+    <div class="card bg-secondary mb-3" style="max-width: 40rem; margin-left: auto;
             margin-right: auto;  border-radius: 12px;    border: 5px solid black; ">
 
-                <div class ="center">
+        <div class="center">
 
-            <?php if($esercizio->tipo == 'Audio') : ?>
-                AUDIO    <div>
-                <p>Clicca play per riprodurre l'audio</p>
-                    <audio src=<?php echo " $sound " ?> controls>
-                    </div>
-            <?php elseif($esercizio->tipo == 'Immagine') : ?>
-                IMMAGINE    <div>
-                <img src= <?php echo " $img " ?>,
-                        alt=<?php echo "$id" ?>, 
-                        width="300" ,
-                        height="300"; style="border-radius: 12px;  border: 5px solid black;"
-                        >
-                </div>    </div>
-            <?php elseif($esercizio->tipo == 'Coppia Minima') : ?>
-            COPPIA
+            <?php if ($esercizi[$k]->tipo == 'Audio') : ?>
                 <div>
-                            <?php if($rand % 2 == 0) : ?>
-
-                            <img src= <?php echo " $img " ?>,
-                                    alt=<?php echo "$id" ?>, 
-                                    width="300" ,
-                                    height="300"; style="border-radius: 12px;  border: 5px solid black;"
-                                    >
-                            <img src= <?php echo " $img2 " ?>,
-                                    alt=<?php echo "$id2" ?>, 
-                                    width="300" ,
-                                    height="300"; style="border-radius: 12px;  border: 5px solid black;"
-                                    >
-                            </div>
-
-                            <?php else : ?>
-
-                            <img src= <?php echo " $img2 " ?>,
-                                    alt=<?php echo "$id2" ?>, 
-                                    width="300" ,
-                                    height="300"; style="border-radius: 12px;  border: 5px solid black;"
-                                    >
-                            <img src= <?php echo " $img " ?>,
-                                    alt=<?php echo "$id" ?>, 
-                                    width="300" ,
-                                    height="300"; style="border-radius: 12px;  border: 5px solid black;"
-                                    >
-                            </div>
-                            <div>
-                            La parola giusta e' (<?php echo "$id" ?>)
-                        <div>
-                            <audio controls="controls">
-                        <source src="<?php echo"$sound"?>"  type="audio/mp3">
-                        </audio>
-                        </div>      
-                        </div>   
-
-
-                        </div>     
-
-            
-                            <?php endif; ?>
-
-
-            <?php else : ?>
-            Nothing
-            <?php endif; ?>
-        
-            <div class ="center">
-            <form action="/action_page.php">
-            <label for="fname">Nota</label>
-            
-            <div class ="center">
-            <input type="text" id="fname" name="fname" ><br><br>
-            </div>
-            </form>
-            </div>
-            
-
-            <div class ="center">
-            <button type="button" style="width: 90px; border-radius: 9px; background-color: #b7e2a1; border: 2px solid black;" 
-            onclick="alert('bla bla esito positivo')"
-            >Bene! </button>
-
-                <button type="button" style="width: 90px; border-radius: 9px; background-color: #ff6666; border: 2px solid black;"
-                onclick="alert('bla bla esito negativo')"
-                >Male!</button>
+                    <?php echo $this->render('_esercizioAudio', ['esercizio' => $esercizi[$k]]); ?>
                 </div>
 
-                    <div class ="center">
-                    <button type="button" style="width: 90px; border-radius: 9px; background-color: #3399ff; border: 2px solid black;" 
-                            >Avanti! </button>
-                            </div>
+            <?php elseif ($esercizi[$k]->tipo == 'Immagine') : ?>
+                <div>
+                    <?php echo $this->render('_esercizioImmagine', ['esercizio' => $esercizi[$k]]); ?>
+                </div>
 
-                </div>            
+            <?php elseif ($esercizi[$k]->tipo == 'Coppia Minima') : ?>
+                <div>
+                    <?php echo $this->render('_esercizioCoppia', ['esercizio' => $esercizi[$k]]); ?>
+                </div>
+
+            <?php else : ?>
+                Nothing
+            <?php endif; ?>
+
+            <div class="center">
+
             </div>
+
+            <div class="bigfont">
+                <p>Che valutazione daresti?</p>
+
+                <div class="biggertext">
+                    <?php echo Html::radioList('esiti[' . $k . ']', false,  [false => 'Positiva', true => 'Negativa'], ['separator' => '', 'tabindex' => 2,]) ?>
+                </div>
+
+            </div>
+        </div>
+    </div>
+<?php endfor; ?>
+
+<div class="center">
+    <div class="card bg-secondary mb-3" style="max-width: 40rem; margin-left: auto;
+            margin-right: auto;  border-radius: 12px;    border: 5px solid black; ">
+        <div class="center">
+            <form action="/action_page.php">
+                <h4>Nota</h4>
+
+                <?php echo Html::activeTextarea($model, 'note') ?>
+        </div>
+        </form>
+        <div class="center">
+            <button type="submit" style="width: 90px; border-radius: 9px; background-color:
+     #3399ff; border: 2px solid black;" onclick="alert('bla bla')">Avanti! </button>
+        </div>
+        <!-- < ?=Html::submitButton('Submit', ['class'=> 'submit'], ) ?> -->
+    </div>
+</div>
+</div>
+<?php $form->end(); ?>

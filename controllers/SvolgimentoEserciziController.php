@@ -47,7 +47,7 @@ class SvolgimentoEserciziController extends \yii\web\Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('svolgiesercizio', [
+        return $this->render('svolgi-sessione', [
             'esercizi' => $esercizi, 'model' => $model
         ]);
     }

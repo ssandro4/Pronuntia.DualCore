@@ -9,6 +9,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use app\models\Paziente;
 use app\models\Composizionesessione;
+use Yii;
 
 class SvolgimentoEserciziController extends \yii\web\Controller
 {
@@ -19,6 +20,9 @@ class SvolgimentoEserciziController extends \yii\web\Controller
 
     public function actionSvolgiSessione($sessione, $paziente)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-caregiver');
+        }
         $model = $this->findAssegnazioneSessione($sessione, $paziente);
         $esercizi = $model->getSessione0()->one()->getEsercizios()->all();
         $parole = array();

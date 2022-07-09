@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
@@ -20,7 +21,7 @@ $config = [
         ],
         'user' => [
             'class'=>'yii\web\User',
-            'identityClass' => 'app\models\Logopedista',
+            'identityClass' => 'app\models\Utente',
             'enableAutoLogin' => false,
         ],       
         'errorHandler' => [

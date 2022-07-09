@@ -19,7 +19,7 @@ class GestioneEserciziController extends \yii\web\Controller
     public function actionAggiungiParola()
     {
         if (Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect('/site/login-logopedista');
         }
 
         $model = new Parola();
@@ -39,6 +39,10 @@ class GestioneEserciziController extends \yii\web\Controller
 
     public function actionAggiungiParolaPopup()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
+
         if (Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -61,6 +65,10 @@ class GestioneEserciziController extends \yii\web\Controller
 
     public function actionCreaEsercizio()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
+
         $model = new Esercizio();
         $model->logopedista = Yii::$app->user->identity->idLogopedista;
         Url::remember();
@@ -79,6 +87,9 @@ class GestioneEserciziController extends \yii\web\Controller
 
     public function actionCreaEsercizioPopup()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
         $model = new Esercizio();
         $model->logopedista = Yii::$app->user->identity->idLogopedista;
         if ($this->request->isPost) {
@@ -96,6 +107,9 @@ class GestioneEserciziController extends \yii\web\Controller
 
     public function actionCreaSessione() //e componila
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
         $model1 = new Sessione();
         $model1->logopedista = Yii::$app->user->identity->idLogopedista;
         if ($this->request->isPost) {
@@ -115,6 +129,9 @@ class GestioneEserciziController extends \yii\web\Controller
 
     public function actionComponiSessione($sessione)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
         $numEsercizi = $this->findSessione($sessione)->numEsercizi;
         $arrModels = array();
         for ($k = 0; $k < $numEsercizi; $k++) {
@@ -142,6 +159,9 @@ class GestioneEserciziController extends \yii\web\Controller
 
     public function actionAssegnaSessione($sessione = null)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
         $model = new Assegnazionesessione();
         $model->sessione = $sessione;
         if ($this->request->isPost) {
@@ -164,7 +184,10 @@ class GestioneEserciziController extends \yii\web\Controller
     }
 
     public function actionModificaParola($idParola)
-    {
+    {   
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
         $model = $this->findParola($idParola);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {

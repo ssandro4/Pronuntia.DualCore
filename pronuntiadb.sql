@@ -2,6 +2,7 @@ drop database if exists pronuntiadb;
 create database if not exists pronuntiadb;
 use pronuntiadb;
 
+
 CREATE TABLE Logopedista (
     idLogopedista INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(24),
@@ -96,14 +97,7 @@ CREATE TABLE AssegnazioneSessione (
     FOREIGN KEY (paziente)
         REFERENCES Paziente (idPaziente)
 );
-/*
-create table CoppiaMinima(
-idCoppia varchar(52) PRIMARY KEY,
-parola1 varchar(24),
-parola2 varchar(24),
-FOREIGN KEY (parola1) references Parola(idParola),
-FOREIGN KEY (parola2) references Parola(idParola));
-*/
+
 insert into Logopedista values
 (1001,"Mario","Rossi", "mar.rosso@libero.it","LogoLoco","test200key","200-token"),
 (1002,"Giovanni","Bianchi", "gio.bianchi@libero.it","password1","test201key","201-token");
@@ -111,10 +105,25 @@ insert into Logopedista values
 insert into Caregiver (nome,cognome,email,password,authKey,accessToken) values
 ("Giovanni","Marroni", "giov.mar@gmail.com","Ketchup3Maionese","test100key","100-token"),
 ("Simone","Verdi","simo.ver@tiscali.it","SimoneLimone","test101key","101-token");
+
+drop table if exists Utente;
+
+CREATE TABLE Utente AS SELECT * FROM
+    (SELECT 
+        idLogopedista AS id, email, password, authkey,  'logopedista' as tipo
+    FROM
+        logopedista UNION SELECT 
+        idCaregiver AS id, email, password, authkey, 'caregiver' as tipo
+    FROM
+        caregiver) a;
+        
+ALTER TABLE utente 
+ADD PRIMARY KEY (`id`);
+
 SELECT 
     *
 FROM
-    caregiver;
+    utente;
 
 insert into Paziente value
 (1,"Pino","Pini","dislessia, discalculia",1,1001, true);

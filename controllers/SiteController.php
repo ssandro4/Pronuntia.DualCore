@@ -10,6 +10,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\LoginFormLogopedista;
+use app\models\LoginFormCaregiver;
 use app\models\User;
 
 class SiteController extends Controller
@@ -65,15 +67,7 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-/*
-    public function actionCreacaregiver()
-    {
-        $model= new Caregiver();
-        return $this->render('creacaregiver', [
-            'model' => $model,
-        ]);
-    }
-*/
+
     /**
      * Login action.
      *
@@ -92,6 +86,42 @@ class SiteController extends Controller
 
         $model->password = '';
         return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLoginLogopedista()
+    {
+
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        $this->tabellaAccessi();
+        $model = new LoginFormLogopedista();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+
+        $model->password = '';
+        return $this->render('login-logopedista', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLoginCaregiver()
+    {
+
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+        $this->tabellaAccessi();
+        $model = new LoginFormCaregiver();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+
+        $model->password = '';
+        return $this->render('login-caregiver', [
             'model' => $model,
         ]);
     }
@@ -193,4 +223,18 @@ class SiteController extends Controller
         ]);
     }
 
+    protected function tabellaAccessi()
+    {
+        Yii::$app->db->createCommand('drop table if exists utente;')->execute();
+        Yii::$app->db->createCommand('CREATE TABLE utente AS SELECT * FROM
+        (SELECT 
+            idLogopedista AS id, email, password, authkey,  "logopedista" as tipo
+        FROM
+            logopedista UNION SELECT 
+            idCaregiver AS id, email, password, authkey, "caregiver" as tipo
+        FROM
+            caregiver) a;')->execute();
+        Yii::$app->db->createCommand('ALTER TABLE utente 
+            ADD PRIMARY KEY (`id`);')->execute();
+    }
 }

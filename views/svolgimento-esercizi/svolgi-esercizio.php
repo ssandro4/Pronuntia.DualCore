@@ -41,7 +41,7 @@ $form = ActiveForm::begin();
 ?>
 <?php for ($k = 0; $k < sizeof($esercizi); $k++) : ?>
     <div class="card bg-secondary mb-3" style="max-width: 40rem; margin-left: auto;
-            margin-right: auto;  border-radius: 12px;    border: 5px solid black; ">
+            margin-right: auto;    margin-right: auto;  border-radius: 7px;   border: 1px solid black; background: white;"">
 
         <div class="center">
 

@@ -40,8 +40,9 @@ use yii\widgets\ActiveForm;
 $form = ActiveForm::begin();
 ?>
 <?php for ($k = 0; $k < sizeof($esercizi); $k++) : ?>
-    <div class="card bg-secondary mb-3" style="max-width: 40rem; margin-left: auto;
-            margin-right: auto;  border-radius: 12px;    border: 5px solid black; ">
+    <div class="card" style="max-width: 40rem; margin-left: auto;
+            margin-right: auto;  border-radius: 8px;   
+            border: 2px solid black; background: white; padding: 7px; ">
 
         <div class="center">
 
@@ -78,11 +79,16 @@ $form = ActiveForm::begin();
             </div>
         </div>
     </div>
+    <div>     
+       .</div>
 <?php endfor; ?>
+<div>     
+       .</div>
 
 <div class="center">
-    <div class="card bg-secondary mb-3" style="max-width: 40rem; margin-left: auto;
-            margin-right: auto;  border-radius: 12px;    border: 5px solid black; ">
+    <div class="card " style="max-width: 40rem; margin-left: auto;
+            margin-right: auto; border-radius: 7px;   border: 1px solid black; 
+            background: white; padding: 7px;">
         <div class="center">
             <form action="/action_page.php">
                 <h4>Nota</h4>
@@ -92,7 +98,7 @@ $form = ActiveForm::begin();
         </form>
         <div class="center">
             <button type="submit" style="width: 90px; border-radius: 9px; background-color:
-     #3399ff; border: 2px solid black;" onclick="alert('bla bla')">Avanti! </button>
+     #3399ff; border: 2px solid black;padding: 7px;" onclick="alert('bla bla')">Avanti! </button>
         </div>
         <!-- < ?=Html::submitButton('Submit', ['class'=> 'submit'], ) ?> -->
     </div>

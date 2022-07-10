@@ -65,7 +65,7 @@ use app\models\Paziente;
    
     <div class="box">
    <?= $form->field($model, 'sessione')
-      ->dropDownList(ArrayHelper::map(Sessione::find()->where(['logopedista'=>Yii::$app->user->identity->idLogopedista])->all(),'idSessione','idSessione'))
+      ->dropDownList(ArrayHelper::map(Sessione::find()->where(['logopedista'=>Yii::$app->user->identity->id])->all(),'idSessione','idSessione'))
  ?>
  </div>
 
@@ -73,7 +73,7 @@ use app\models\Paziente;
  <div class="box">
         <a href="#" class="tip"><span>La sessione può essere assegnata ad altri pazienti successivamente</span>
      <?= $form->field($model, 'paziente')
-      ->dropDownList(ArrayHelper::map(Paziente::find()->where(['logopedista'=>Yii::$app->user->identity->idLogopedista])->all(),'idPaziente','nomeECognome'))
+      ->dropDownList(ArrayHelper::map(Paziente::find()->where(['logopedista'=>Yii::$app->user->identity->id])->all(),'idPaziente','nomeECognome'))
  ?></a>
  </div>
     

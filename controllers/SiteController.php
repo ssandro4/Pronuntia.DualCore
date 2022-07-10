@@ -167,12 +167,7 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionLoginselect()
-    {
-        return $this->render('loginselect');
-        
-    }
-
+ 
 
     public function actionQuestionario()
     {

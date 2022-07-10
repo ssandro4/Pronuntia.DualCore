@@ -59,7 +59,7 @@ class GestioneUtentiController extends \yii\web\Controller
         }
         Url::remember();
         $model = new Paziente();
-        $model->logopedista = Yii::$app->user->identity->idLogopedista;
+        $model->logopedista = Yii::$app->user->identity->id;
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view-profilo-paziente', 'idPaziente' => $model->idPaziente]);

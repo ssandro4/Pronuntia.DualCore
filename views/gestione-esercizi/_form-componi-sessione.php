@@ -67,7 +67,7 @@ use app\models\Esercizio;
         for ($k = 0; $k < sizeof($arrModels); $k++) {
             $model = $arrModels[$k];
 
-            echo $form->field($model, '[' . $k . ']esercizio')->dropDownList(ArrayHelper::map(Esercizio::find()->where(['logopedista' => Yii::$app->user->identity->idLogopedista])->all(), 'idEsercizio', 'idEsercizio'));
+            echo $form->field($model, '[' . $k . ']esercizio')->dropDownList(ArrayHelper::map(Esercizio::find()->where(['logopedista' => Yii::$app->user->identity->id])->all(), 'idEsercizio', 'idEsercizio'));
         }
         ?>
     </div>

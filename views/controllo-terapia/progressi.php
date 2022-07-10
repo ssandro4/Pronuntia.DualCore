@@ -32,45 +32,47 @@ use yii\widgets\DetailView;
         Percentuale errori:
     </h6>
     <?php for ($k = 0; $k < sizeof($sessioni); $k++) : ?>
-
-        <?php $esercizi = Sessione::findOne(['idSessione' => $sessioni[$k]['sessione']]); ?>
-
         <div>
             <div class="box" style=" padding: 7px;">
 
-                <div>sessione assegnata il: <?php echo $sessioni[$k]['dataCreazione'] ?> </div>
 
-                <div class="progress">
+                <?php if ($sessioni[$k]['nuovo'] == 0) : ?>
 
-                    <div class="progress-bar " role="progressbar" aria-valuemin="0" 
-                    aria-valuemax="$esercizi['numEsercizi']" 
-                    aria-valuenow="<?php echo $sessioni[$k]['cntErrori'] * 100 / $esercizi['numEsercizi'] ?>" 
-                    style="width:<?php echo $sessioni[$k]['cntErrori'] * 100 / $esercizi['numEsercizi'] ?>%">
+                    <div> <?php echo $sessioni[$k]['sessione']; ?>, assegnata il: <?php echo $sessioni[$k]['dataCreazione'] ?> </div>
+                    <?php if ($percentuali[$k] != 0) : ?>
+                        <div class="progress">
+                            <div class="progress-bar " role="progressbar" aria-valuemin="0" aria-valuemax="$esercizi['numEsercizi']" aria-valuenow="<?php echo $percentuali[$k] ?>" style="width:<?php echo $percentuali[$k] ?>%">
+                                <?php echo $percentuali[$k] ?>%
+                            </div>
+                        </div>
+                    <?php else : ?>
+                        Nessun errore!
+                    <?php endif; ?>
 
-                        <?php echo $sessioni[$k]['cntErrori'] * 100 / $esercizi['numEsercizi']; ?>%
-                        
-                    </div>
-                </div>
+                <?php endif; ?>
+
             </div>
         </div>
     <?php endfor; ?>
 </div>
 
 <?php for ($k = 0; $k < sizeof($sessioni); $k++) : ?>
-    <p>
-    <div class="card" style="max-width: 40rem; 
+
+    <?php if ($sessioni[$k]['nuovo'] == 0) : ?>
+        <p>
+        <div class="card" style="max-width: 40rem; 
             margin-right: auto;  border-radius: 7px;   border: 1px solid black; background: white;">
-        <div class="box" style=" padding: 7px;">
-            <div> Sessione: <?php echo $sessioni[$k]['sessione']; ?> </div>
-            <div> Esito: <?php echo $sessioni[$k]['esito']; ?></div>
+            <div class="box" style=" padding: 7px;">
+                <div> Sessione: <?php echo $sessioni[$k]['sessione']; ?> </div>
+                <div> Esito: <?php echo $sessioni[$k]['esito']; ?></div>
 
-            <!--    <div> errori: < ?php echo $sessioni[$k]['elencoErrori']; ?></div> -->
+                <!--    <div> errori: < ?php echo $sessioni[$k]['elencoErrori']; ?></div> -->
 
-            <?php $esercizi = Sessione::findOne(['idSessione' => $sessioni[$k]['sessione']]); ?>
-            <div> Numero esercizi sbagliati: <?php echo $sessioni[$k]['cntErrori'] ?>
-                su <?php echo $esercizi['numEsercizi']; ?></div>
-            <div> Nota Caregiver: <?php echo $sessioni[$k]['note']; ?></div>
+                <div> Numero esercizi sbagliati: <?php echo $sessioni[$k]['cntErrori'] ?>
+                    su <?php echo $esercizi[$k]; ?></div>
+                <div> Nota Caregiver: <?php echo $sessioni[$k]['note']; ?></div>
+            </div>
         </div>
-    </div>
-    </p>
+        </p>
+    <?php endif; ?>
 <?php endfor; ?>

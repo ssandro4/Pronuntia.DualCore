@@ -18,10 +18,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'pathMP3')->textInput(['maxlength' => true]) ?>
 
-    <div class="form-group">
+    <div class="form-group"> 
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
+    <?= Html::a('Torna al vocabolario', ['gestione-esercizi/vocabolario'], ['class' => 'btn btn-success']) ?>
 </div>

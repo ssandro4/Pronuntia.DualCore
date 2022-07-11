@@ -16,7 +16,14 @@ use yii\widgets\ActiveForm;
         height: 90x;
 
     }
-
+    .btn{
+        border-radius: 8px;
+        border: 2px ;
+        padding: 15px;
+        text-align: center;
+        background-color: #555555;    
+        font-size: 20px;
+    }
     .center {
         margin: 30 auto;
         margin-left: auto;

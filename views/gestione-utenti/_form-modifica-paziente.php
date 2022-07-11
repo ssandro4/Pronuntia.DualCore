@@ -25,6 +25,14 @@ use app\models\Caregiver;
 
     }
 
+    .btn{
+        border-radius: 8px;
+        border: 2px ;
+        padding: 15px;
+        text-align: center;
+        background-color: #555555;    
+        font-size: 20px;
+    }
 
     .center {
         margin: 30 auto;
@@ -63,7 +71,9 @@ use app\models\Caregiver;
 </style>
 
 <div class="paziente-form">
-
+    <h2>
+        Modifica: <?php echo $model['nome'] ?> <?php echo $model['cognome'] ?>
+    </h2>
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="box">

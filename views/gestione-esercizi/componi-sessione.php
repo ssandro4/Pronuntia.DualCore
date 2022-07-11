@@ -8,8 +8,6 @@ use app\models\Esercizio;
 /* @var $model app\models\Composizionesessione */
 
 //$this->title = 'Create Composizionesessione';
-$this->params['breadcrumbs'][] = ['label' => 'Composizionesessiones', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="composizionesessione-create">
 

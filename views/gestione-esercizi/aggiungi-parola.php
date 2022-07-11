@@ -6,8 +6,6 @@ use yii\helpers\Html;
 /* @var $model app\models\Parola */
 
 //$this->title = 'Aggiungi una parola al vocabolario';
-$this->params['breadcrumbs'][] = ['label' => 'Parolas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="parola-create">

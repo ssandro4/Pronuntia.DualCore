@@ -8,7 +8,14 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<style>
+<style>    .btn{
+        border-radius: 8px;
+        border: 2px ;
+        padding: 15px;
+        text-align: center;
+        background-color: #555555;    
+        font-size: 20px;
+    }
     .box {
         font-size: 20px;
         width: 300px;
@@ -53,9 +60,8 @@ use yii\widgets\ActiveForm;
 </style>
 
 
-<div class="center">
-    <h3>Aggiungi una parola al vocabolario</h3>
-</div>
+    <h3>Aggiungi una parola al <a href=<?php echo '/gestione-esercizi/vocabolario' ?>>Vocabolario</h3>
+
 
 <div class="parola-form">
 

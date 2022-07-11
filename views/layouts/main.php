@@ -18,18 +18,11 @@ AppAsset::register($this);
 
 
 <style>
-    .col-3 {
-        -moz-hyphens: auto;
-        -ms-hyphens: auto;
-        -webkit-hyphens: auto;
-        hyphens: auto;
-        word-wrap: break-word;
-        margin: 16px 16px;
-    }
 
     .logbtn {
         border-radius: 8px;
-        border: 3px solid black;
+        padding: 2px;
+        border: 3px ;
         text-align: center;
         background-color: teal;
 
@@ -46,17 +39,21 @@ AppAsset::register($this);
         width: 240px;
     }
 
-    hr.solid {
-        border-top: 3px solid #bbb;
+    .my-navbar{
+        background-color: #555555;  
+      color: #555555;  
     }
+  
 </style>
 
 
 <html lang="<?= Yii::$app->language ?>" class="h-100">
 
+<div class='navbar'>
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" 
+    style='padding: 2px;'>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -72,9 +69,11 @@ AppAsset::register($this);
             'brandLabel' => Yii::$app->name,
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
-                'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+                'class' => ' navbar nav-pills navbar-dark my-navbar fixed-top',
             ],
         ]);
+//navbar-expand-md
+
         if (Yii::$app->user->isGuest) {
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav'],
@@ -87,6 +86,7 @@ AppAsset::register($this);
                 ],
             ]);
             NavBar::end();
+            
         } else if (Yii::$app->user->identity->tipo == 'caregiver') {
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav'],
@@ -114,7 +114,9 @@ AppAsset::register($this);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav'],
                 'items' => [
-                    ['label' => 'Home', 'url' => ['/site/index']],
+                    
+                    ['label' => 'Bacheca', 'url' => ['/controllo-terapia/bacheca']],
+                    ['label' => 'Home', 'url' => ['/gestione-utenti/index-logopedista']],
                     ['label' => 'Crea Caregiver', 'url' => ['/gestione-utenti/crea-profilo-caregiver']],
                     ['label' => 'Crea Paziente', 'url' => ['/gestione-utenti/crea-profilo-paziente']],
                     ['label' => 'Crea Parola', 'url' => ['/gestione-esercizi/aggiungi-parola']],
@@ -139,6 +141,7 @@ AppAsset::register($this);
             NavBar::end();
         }
         ?>
+        </div>
     </header>
 
     <main role="main" class="flex-shrink-0">

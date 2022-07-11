@@ -27,6 +27,15 @@ use app\models\Esercizio;
         text-align: center;
     }
 
+    .btn{
+        border-radius: 8px;
+        border: 2px ;
+        padding: 15px;
+        text-align: center;
+        background-color: #555555;    
+        font-size: 20px;
+    }
+
     a.tip {
         text-decoration: none
     }
@@ -40,6 +49,14 @@ use app\models\Esercizio;
         display: none
     }
 
+    .btn{
+        border-radius: 8px;
+        border: 2px ;
+        padding: 15px;
+        text-align: center;
+        background-color: #555555;    
+        font-size: 20px;
+    }
     a.tip:hover span {
         border: #c0c0c0 1px;
         padding: 5px 20px 5px 5px;

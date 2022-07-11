@@ -58,6 +58,7 @@ class ControlloTerapiaController extends \yii\web\Controller
         if (Yii::$app->user->identity->tipo == 'caregiver') {
             return $this->goHome();
         }
+
         $sessioni = Assegnazionesessione::find()
             ->join('INNER JOIN', 'paziente', 'paziente.idPaziente = paziente')
             ->where(['nuovo' => '1', 'paziente.logopedista' => Yii::$app->user->id])
@@ -74,6 +75,27 @@ class ControlloTerapiaController extends \yii\web\Controller
 
         return $this->render('bacheca', [
             'sessioni' =>  $sessioni, 'nomePaziente' =>  $nomePaziente, 'cognomePaziente' =>  $cognomePaziente, 'idPaziente' =>  $idPaziente,
+        ]);
+    }
+
+    
+    public function actionSessioni($idPaziente)
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-caregiver');
+        }
+        
+        $sessioni = Assegnazionesessione::find()
+            ->where(['paziente' => $idPaziente])
+            ->andwhere(['nuovo' => 1])
+            ->orderBy(['paziente' => SORT_DESC])
+            ->all();
+
+            $nomePaziente = Paziente::findOne(['idPaziente' => $idPaziente])->nome;
+            $cognomePaziente = Paziente::findOne(['idPaziente' => $idPaziente])->cognome;
+
+        return $this->render('sessioni', [
+            'sessioni' =>  $sessioni,'idPaziente' =>  $idPaziente,'nomePaziente' =>  $nomePaziente, 'cognomePaziente' =>  $cognomePaziente,
         ]);
     }
 }

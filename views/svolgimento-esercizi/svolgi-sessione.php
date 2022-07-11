@@ -28,21 +28,28 @@ use yii\widgets\ActiveForm;
     }
 
     input[type=radio] {
-    border: 0px;
-    width: 100%;
-    height: 2em;
-    
-    background-color: #d1d3d1;
-}
+        border: 0px;
+        width: 100%;
+        height: 2em;
+        background-color: #d1d3d1;
+    }
+
+    .card {
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 8px;
+        border: 2px solid black;
+        background: white;
+        padding: 7px;
+    }
 </style>
 <?php
 
 $form = ActiveForm::begin();
 ?>
 <?php for ($k = 0; $k < sizeof($esercizi); $k++) : ?>
-    <div class="card" style="max-width: 40rem; margin-left: auto;
-            margin-right: auto;  border-radius: 8px;   
-            border: 2px solid black; background: white; padding: 7px; ">
+    <div class="card">
 
         <div class="center">
 
@@ -79,16 +86,14 @@ $form = ActiveForm::begin();
             </div>
         </div>
     </div>
-    <div>     
-       .</div>
+    <div>
+        .</div>
 <?php endfor; ?>
-<div>     
-       .</div>
+<div>
+    .</div>
 
 <div class="center">
-    <div class="card " style="max-width: 40rem; margin-left: auto;
-            margin-right: auto; border-radius: 7px;   border: 1px solid black; 
-            background: white; padding: 7px;">
+    <div class="card">
         <div class="center">
             <form action="/action_page.php">
                 <h4>Nota</h4>

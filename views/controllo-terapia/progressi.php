@@ -14,6 +14,15 @@ use yii\widgets\DetailView;
         text-align: center;
     }
 
+
+    .btn{
+        border-radius: 8px;
+        border: 2px ;
+        padding: 15px;
+        text-align: center;
+        background-color: #555555;    
+        font-size: 20px;
+    }
     .progress-bar {
         background-color: #B20000;
     }

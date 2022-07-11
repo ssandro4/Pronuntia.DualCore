@@ -1,10 +1,9 @@
 <?php
-/* @var $this yii\web\View */
 
 use yii\helpers\Html;
-
+use yii\widgets\ActiveForm;
+use yii\controllers\ControlloTerapiaController;
 ?>
-
 <style>
     .center {
         margin: 30 auto;
@@ -19,6 +18,7 @@ use yii\helpers\Html;
     }
 
     .card {
+        margin-right: auto;
         max-width: 40rem;
         margin-right: auto;
         border-radius: 8px;
@@ -29,13 +29,16 @@ use yii\helpers\Html;
 
     .padding {
         max-width: 50rem;
+        margin-left: auto;
         margin-right: auto;
         border-radius: 8px;
         padding: 10px;
     }
 
     .smallcard {
-        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 50rem;
         border-radius: 8px;
         border: 2px solid black;
         padding: 7px;
@@ -53,21 +56,23 @@ use yii\helpers\Html;
     }
 </style>
 
-<h3>I miei pazienti</h3>
+<h3>
+    Sessioni nuove per <?php echo $nomePaziente ?>:
+</h3>
+<div class='center'>
 
+    <div class="card">
+        <?php for ($k = 0; $k < sizeof($sessioni); $k++) : ?>
+            <div class="padding">
+                <div class="smallcard">
 
-<div class="card">
-    <?php for ($k = 0; $k < sizeof($pazienti); $k++) : ?>
-        <div class="padding">
-            <div class="smallcard">
-                <h3> Paziente: <?php echo $pazienti[$k]->nome ?> <?php echo $pazienti[$k]->cognome ?></h3>
+                    <h3> <?php echo $sessioni[$k]['sessione']; ?> assegnata il <?php echo $sessioni[$k]['dataCreazione'] ?> </h3>
 
-                <a class='btn' href=<?php echo '/controllo-terapia/progressi?idPaziente=' . $pazienti[$k]->idPaziente ?>>Progressi</a>
+                    <a class='btn' href=<?php echo '/svolgimento-esercizi/svolgi-sessione/?sessione='.$sessioni[$k]['sessione'].'&paziente='.$idPaziente?>>Svolgi Sessione</a>
 
-                <a class='btn' href=<?php echo '/controllo-terapia/sessioni?idPaziente=' . $pazienti[$k]->idPaziente ?>>Sessioni</a>
-                
-
+                </div>
             </div>
-        </div>
-    <?php endfor; ?>
+
+        <?php endfor; ?>
+    </div>
 </div>

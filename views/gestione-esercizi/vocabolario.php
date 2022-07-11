@@ -10,53 +10,72 @@ use app\models\Parola;
 /* @var $searchModel app\models\parolasearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Vocabolario';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<style>
+    .btn{
+        border-radius: 8px;
+        border: 2px ;
+        padding: 15px;
+        text-align: center;
+        background-color: #555555;    
+        font-size: 20px;
+    }
+
+</style>
+
 <div class="gestione-esercizi-vocabolario">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <h2>
+        Vocabolario
+    </h2>
+
     <p>
-        <?= Html::a('Create Parola', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Aggiungi Parola', ['gestione-esercizi/aggiungi-parola'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    ?>
 
     <?= GridView::widget([
-    'dataProvider' => $dataProvider,
-    'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
-        
-        'Id Parola' =>'idParola',
-        'Tag' => 'tag',
-        
-        [
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            
+            'Id Parola' => 'idParola',
+            'Tag' => 'tag',
+            
+            [
+                'attribute' => 'img',
+                'format' => 'html',
+                'label' => 'Immagine',
+                'value' => function ($model) {
 
-            'attribute' => 'img',
-            'format' => 'html',
-            'label' => 'Immagine',
+                    return Html::img(
+                        $model['pathIMG'],
+                        ['width' => '140px', 'height' => '100px']
+                    );
+                },
+            ],
 
-            'value' => function ($model) {
+            'File Audio' => 'pathMP3',
 
-                return Html::img( $model['pathIMG'],
-                    ['width' => '140px','height' => '100px' ]);
-            },
+            [
+                'class' => ActionColumn::class,
+                'template' => '{update}',
+                'urlCreator' => function ($action, Parola $model ) {
+                    return Url::to(['gestione-esercizi/modifica-parola', 'idParola' =>  $model['idParola']]);;
+                },
+                'header' => 'Modifica',
+                'headerOptions' => ['style' => 'width:2%']
+                
+            ],
+
         ],
-        
-        'File Audio' => 'pathMP3',
 
-        [
-            'class' => ActionColumn::className(),
-            'urlCreator' => function ($action, Parola $model, $key, $index, $column) {
-                return Url::toRoute([$action, 'idParola' => $model->idParola]);
-             }
-        ],
-
-    ],
-    
-]) ?>
+    ]) ?>
 
     <?php Pjax::end(); ?>
 

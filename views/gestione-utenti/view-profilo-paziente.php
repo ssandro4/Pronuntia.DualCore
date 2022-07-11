@@ -7,9 +7,6 @@ use app\models\Logopedista;
 /* @var $this yii\web\View */
 /* @var $model app\models\Paziente */
 
-$this->title = $model->idPaziente;
-$this->params['breadcrumbs'][] = ['label' => 'Pazientes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="paziente-view">
@@ -21,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Delete', ['delete', 'idPaziente' => $model->idPaziente], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Sei sicuro di voler eliminare?',
                 'method' => 'post',
             ],
         ]) ?>

@@ -92,10 +92,12 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
+                    ['label' => 'Modifica i tuoi dati', 'url' => ['/gestione-utenti/modifica-profilo-caregiver?idCaregiver='.Yii::$app->user->identity->id]],
+                    
+                    ['label' => 'I tuoi pazienti', 'url' => ['#URLDAAGGIUNGERE']],
+                    
                     ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
-                    ['label' => 'Modifica i tuoi dati', 'url' => ['/gestione-utenti/modifica-profilo-caregiver?idCaregiver='.Yii::$app->user->identity->id]],
-                   //['label' => 'Logout Caregiver', 'url' => ['site/logout']],
                     ('<li>'
                         . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
                         . Html::submitButton(
@@ -113,13 +115,17 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
                     ['label' => 'Crea Caregiver', 'url' => ['/gestione-utenti/crea-profilo-caregiver']],
                     ['label' => 'Crea Paziente', 'url' => ['/gestione-utenti/crea-profilo-paziente']],
                     ['label' => 'Crea Parola', 'url' => ['/gestione-esercizi/aggiungi-parola']],
                     ['label' => 'Crea Esercizio', 'url' => ['/gestione-esercizi/crea-esercizio']],
                     ['label' => 'Crea Sessione', 'url' => ['/gestione-esercizi/crea-sessione']],
+                    ['label' => 'Vocabolario', 'url' => ['/gestione-esercizi/vocabolario']],
+                    
+                    ['label' => 'Pazienti', 'url'=> ['#URLDAAGGIUNGERE']],
+                    
+                    ['label' => 'About', 'url' => ['/site/about']],
+                    ['label' => 'Contact', 'url' => ['/site/contact']],
                     ('<li>'
                         . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
                         . Html::submitButton(

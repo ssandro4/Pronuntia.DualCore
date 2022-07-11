@@ -165,14 +165,12 @@ class GestioneUtentiController extends \yii\web\Controller
             return $this->goHome();
         }
         $model = $this->findPaziente($idPaziente);
-        if (Yii::$app->user->identity->id != $model->caregiver)
+        if (Yii::$app->user->identity->id != $model->logopedista) {
             return $this->redirect('/site/index');
+        }
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            if (Yii::$app->user->identity->tipo == 'logopedista') {
-                return $this->redirect('index-logopedista');
-            } else if (Yii::$app->user->identity->tipo == 'caregiver') {
-                return $this->redirect('index-caregiver');
-            }
+
+            return $this->redirect('index-logopedista');
         }
 
         return $this->render('modifica-profilo-paziente', [
@@ -180,7 +178,7 @@ class GestioneUtentiController extends \yii\web\Controller
         ]);
     }
 
-  
+
 
     protected function findPaziente($idPaziente)
     {

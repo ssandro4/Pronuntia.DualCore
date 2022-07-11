@@ -49,7 +49,8 @@
         </div>
 
         <img class="fit-picture"
-     src="https://media.baamboozle.com/uploads/images/508833/1646155474_36203_gif-url.gif">
+     src="https://media.baamboozle.com/uploads/images/508833/1646155474_36203_gif-url.gif"     width="590" 
+     height="auto">
 
     </div>
     <a class='btn' href=<?php echo '/gestione-utenti/index-caregiver' ?>>Torna alla schermata pazienti</a>

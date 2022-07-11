@@ -94,7 +94,7 @@ AppAsset::register($this);
                     ['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'Modifica i tuoi dati', 'url' => ['/gestione-utenti/modifica-profilo-caregiver?idCaregiver='.Yii::$app->user->identity->id]],
                     
-                    ['label' => 'I tuoi pazienti', 'url' => ['#URLDAAGGIUNGERE']],
+                    ['label' => 'I tuoi pazienti', 'url' => ['/gestione-utenti/index-caregiver']],
                     
                     ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
@@ -122,7 +122,7 @@ AppAsset::register($this);
                     ['label' => 'Crea Sessione', 'url' => ['/gestione-esercizi/crea-sessione']],
                     ['label' => 'Vocabolario', 'url' => ['/gestione-esercizi/vocabolario']],
                     
-                    ['label' => 'Pazienti', 'url'=> ['#URLDAAGGIUNGERE']],
+                    ['label' => 'Pazienti', 'url'=> ['/gestione-utenti/index-logopedista']],
                     
                     ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],

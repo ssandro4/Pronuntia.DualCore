@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use yii\base\Model;
 
 use Yii;
@@ -17,7 +18,7 @@ use Yii;
 class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
 {
 
-    
+
     /**
      * {@inheritdoc}
      */
@@ -32,15 +33,16 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
     public function rules()
     {
         return [
-        //    [['idCaregiver'], 'required'],
-       //     [['idCaregiver'], 'integer'],
+            //    [['idCaregiver'], 'required'],
+            //     [['idCaregiver'], 'integer'],
             [['nome', 'cognome', 'email'], 'string', 'max' => 24],
             [['password'], 'string', 'max' => 16],
             ['email', 'email'],
             [['email'], 'unique'],
-        //    [['idCaregiver'], 'unique'],
+            //    [['idCaregiver'], 'unique'],
         ];
-    }/**
+    }
+    /**
      * {@inheritdoc}
      */
     public function attributeLabels()
@@ -48,7 +50,7 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
         return [
             'idCaregiver' => 'Id Caregiver',
             'nome' => 'Nome',
-           // 'cognome' => 'Cognome',
+            // 'cognome' => 'Cognome',
             'email' => 'Email',
             'password' => 'Password',
         ];
@@ -117,7 +119,18 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
         return $this->getAuthKey() === $authKey;
     }
 
-    public function getNomeECognome(){
-        return $this->nome.' '.$this->cognome;
+    public function getNomeECognome()
+    {
+        return $this->nome . ' ' . $this->cognome;
+    }
+
+    /**
+     * Gets query for [[Pazientes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPazientes()
+    {
+        return $this->hasMany(Paziente::className(), ['caregiver' => 'idCaregiver']);
     }
 }

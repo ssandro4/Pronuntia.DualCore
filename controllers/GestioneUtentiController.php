@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Caregiver;
 use app\models\Paziente;
+use app\models\PazienteSearch;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
 
@@ -82,12 +83,37 @@ class GestioneUtentiController extends \yii\web\Controller
         $model->visibile = false;
         $model->save();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index-logopedista']);
     }
 
-    public function actionIndex()
+    public function actionIndexLogopedista()
     {
-        return $this->render('index');
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
+        if (Yii::$app->user->identity->tipo=='caregiver') {
+            return $this->goHome();
+        }
+        
+        $searchModel = new PazienteSearch();
+        $dataProvider = $searchModel->searchByLogopedista(Yii::$app->user->identity->id);
+
+        return $this->render('index-logopedista', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionIndexCaregiver()
+    {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-caregiver');
+        }
+        if (Yii::$app->user->identity->tipo=='logopedista') {
+            return $this->goHome();
+        }
+        $pazienti = Caregiver::findOne(['idCaregiver'=>Yii::$app->user->identity->id])->getPazientes()->all();
+        return $this->render('index-caregiver', ['pazienti'=> $pazienti]);
     }
 
     public function actionModificaProfiloCaregiver($idCaregiver)

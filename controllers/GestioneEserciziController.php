@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Parola;
+use app\models\ParolaSearch;
 use app\models\Assegnazionesessione;
 use app\models\Composizionesessione;
 use app\models\ComposizionesessioneSearch;
@@ -65,7 +66,17 @@ class GestioneEserciziController extends \yii\web\Controller
         ]);
     }
 
+    public function actionVocabolario()
+    {
 
+        $searchModel = new ParolaSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('vocabolario', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
     public function actionCreaEsercizio()
     {
         if (Yii::$app->user->isGuest) {
@@ -160,7 +171,7 @@ class GestioneEserciziController extends \yii\web\Controller
     }
 
 
-    public function actionAssegnaSessione($sessione = null, $paziente=null)
+    public function actionAssegnaSessione($sessione = null, $paziente = null)
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');

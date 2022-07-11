@@ -18,6 +18,11 @@ use yii\helpers\ArrayHelper;
 
 
 <?php
+
+if (Yii::$app->user->id === Yii::$app->user->identity->id)
+echo 'true<br>';
+
+
 $msg = Sessione::findOne('idSessione' == 'oipougytfdrf')->getComposizionesessiones()->all();
 if (Sessione::findOne('idSessione' == 'gianni')->getComposizionesessiones()->all())
         echo $msg[0]->esercizio;

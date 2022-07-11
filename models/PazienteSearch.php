@@ -69,4 +69,36 @@ class PazienteSearch extends Paziente
 
         return $dataProvider;
     }
+
+    public function searchByLogopedista($idLogopedista)
+    {
+        $query = Paziente::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query->where(['visibile'=>true, 'logopedista'=>$idLogopedista]),
+        ]);
+
+        $this->load($idLogopedista);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'idPaziente' => $this->idPaziente,
+            'caregiver' => $this->caregiver,
+            'logopedista' => $this->logopedista,
+        ]);
+
+        $query->andFilterWhere(['like', 'nome', $this->nome])
+            ->andFilterWhere(['like', 'cognome', $this->cognome])
+            ->andFilterWhere(['like', 'diagnosi', $this->diagnosi]);
+
+        return $dataProvider;
+    }
 }

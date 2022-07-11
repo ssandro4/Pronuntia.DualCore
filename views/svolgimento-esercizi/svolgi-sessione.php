@@ -103,7 +103,7 @@ $form = ActiveForm::begin();
         </form>
         <div class="center">
             <button type="submit" style="width: 90px; border-radius: 9px; background-color:
-     #3399ff; border: 2px solid black;padding: 7px;" onclick="alert('bla bla')">Avanti! </button>
+     #3399ff; border: 2px solid black;padding: 7px;" onclick="alert('Risultati Sessione Inviati')">Avanti! </button>
         </div>
         <!-- < ?=Html::submitButton('Submit', ['class'=> 'submit'], ) ?> -->
     </div>

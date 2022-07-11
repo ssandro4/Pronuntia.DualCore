@@ -98,4 +98,5 @@ class ControlloTerapiaController extends \yii\web\Controller
             'sessioni' =>  $sessioni,'idPaziente' =>  $idPaziente,'nomePaziente' =>  $nomePaziente, 'cognomePaziente' =>  $cognomePaziente,
         ]);
     }
+
 }

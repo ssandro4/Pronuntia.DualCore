@@ -42,7 +42,7 @@ class SvolgimentoEserciziController extends \yii\web\Controller
                 $model->nuovo=0;
                 $model->save();
             }
-            return $this->render('assegnazionesessione/view',['sessione'=>$sessione,'paziente'=>$paziente]);
+            return $this->render('congratulazioni',['paziente'=>$paziente]);
        
         } else {
             $model->loadDefaultValues();
@@ -52,12 +52,6 @@ class SvolgimentoEserciziController extends \yii\web\Controller
             'esercizi' => $esercizi, 'model' => $model
         ]);
     }
-
-
-
-
-
-
 
     protected function findAssegnazioneSessione($sessione, $paziente)
     {
@@ -74,5 +68,11 @@ class SvolgimentoEserciziController extends \yii\web\Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    
+    public function actionCongratulazioni()
+    {
+        return $this->render('congratulazioni');
     }
 }

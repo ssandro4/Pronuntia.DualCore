@@ -17,12 +17,15 @@ class GestioneUtentiController extends \yii\web\Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
         }
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
+        }
         $model = new Caregiver();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 //    return $this->redirect(['view-profilo-caregiver', 'idCaregiver' => $model->idCaregiver]);
-                return $this->refresh();
+                return $this->redirect('index-logopedista');
             }
         } else {
             $model->loadDefaultValues();
@@ -35,6 +38,9 @@ class GestioneUtentiController extends \yii\web\Controller
     public function actionCreaProfiloCaregiverPopup()
     {
         if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
             return $this->goHome();
         }
         $model = new Caregiver();
@@ -55,6 +61,12 @@ class GestioneUtentiController extends \yii\web\Controller
 
     public function actionCreaProfiloPaziente()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
+        }
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
         }
@@ -79,7 +91,16 @@ class GestioneUtentiController extends \yii\web\Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
         }
-        $model = $this->findModel($idPaziente);
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
+        }
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
+        $model = $this->findPaziente($idPaziente);
+        if ($model->logopedista != Yii::$app->user->id) {
+            return $this->goHome();
+        }
         $model->visibile = false;
         $model->save();
 
@@ -91,10 +112,10 @@ class GestioneUtentiController extends \yii\web\Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
         }
-        if (Yii::$app->user->identity->tipo=='caregiver') {
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
             return $this->goHome();
         }
-        
+
         $searchModel = new PazienteSearch();
         $dataProvider = $searchModel->searchByLogopedista(Yii::$app->user->identity->id);
 
@@ -109,11 +130,11 @@ class GestioneUtentiController extends \yii\web\Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-caregiver');
         }
-        if (Yii::$app->user->identity->tipo=='logopedista') {
+        if (Yii::$app->user->identity->tipo == 'logopedista') {
             return $this->goHome();
         }
-        $pazienti = Caregiver::findOne(['idCaregiver'=>Yii::$app->user->identity->id])->getPazientes()->all();
-        return $this->render('index-caregiver', ['pazienti'=> $pazienti]);
+        $pazienti = Caregiver::findOne(['idCaregiver' => Yii::$app->user->identity->id])->getPazientes()->all();
+        return $this->render('index-caregiver', ['pazienti' => $pazienti]);
     }
 
     public function actionModificaProfiloCaregiver($idCaregiver)
@@ -121,6 +142,10 @@ class GestioneUtentiController extends \yii\web\Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-caregiver');
         }
+        if (Yii::$app->user->identity->tipo == 'logopedista') {
+            return $this->goHome();
+        }
+
         if (Yii::$app->user->identity->id != $idCaregiver)
             return $this->redirect('/site/index');
         $model = $this->findCaregiver($idCaregiver);
@@ -137,13 +162,17 @@ class GestioneUtentiController extends \yii\web\Controller
     public function actionModificaProfiloPaziente($idPaziente)
     {
         if (Yii::$app->user->isGuest) {
-            return $this->redirect('/site/index');
+            return $this->goHome();
         }
         $model = $this->findPaziente($idPaziente);
         if (Yii::$app->user->identity->id != $model->caregiver)
             return $this->redirect('/site/index');
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view-profilo-paziente', 'idPaziente' => $model->idPaziente]);
+            if (Yii::$app->user->identity->tipo == 'logopedista') {
+                return $this->redirect('index-logopedista');
+            } else if (Yii::$app->user->identity->tipo == 'caregiver') {
+                return $this->redirect('index-caregiver');
+            }
         }
 
         return $this->render('modifica-profilo-paziente', [
@@ -151,12 +180,7 @@ class GestioneUtentiController extends \yii\web\Controller
         ]);
     }
 
-    public function actionViewProfiloPaziente($idPaziente)
-    {
-        return $this->render('view-profilo-paziente', [
-            'model' => $this->findPaziente($idPaziente),
-        ]);
-    }
+  
 
     protected function findPaziente($idPaziente)
     {

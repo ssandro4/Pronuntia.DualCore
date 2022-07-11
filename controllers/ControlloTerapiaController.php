@@ -13,56 +13,67 @@ class ControlloTerapiaController extends \yii\web\Controller
 
     public function actionProgressi($idPaziente)
     {
-        $model = Paziente::findOne(['idPaziente' => $idPaziente]);
+        if (Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
 
-        $sessioni= Assegnazionesessione::find()
+        $model = Paziente::findOne(['idPaziente' => $idPaziente]);
+        if ($model->caregiver != Yii::$app->user->id && $model->logopedista != Yii::$app->user->id)
+            return $this->goHome();
+
+        $sessioni = Assegnazionesessione::find()
             ->where(['paziente' => $idPaziente])
-            ->orderBy(['dataCreazione'=> SORT_DESC])
+            ->orderBy(['dataCreazione' => SORT_DESC])
             ->all();
 
-            for ($k = 0; $k < sizeof($sessioni); $k++) : 
+        for ($k = 0; $k < sizeof($sessioni); $k++) :
 
-                $sessione = Sessione::findOne(['idSessione' => $sessioni[$k]['sessione']]);
-                $esercizi[$k] =  $sessione['numEsercizi'] ;
-                $percentuali[$k] = ($sessioni[$k]['cntErrori'] * 100 / $esercizi[$k]) ;
+            $sessione = Sessione::findOne(['idSessione' => $sessioni[$k]['sessione']]);
+            $esercizi[$k] =  $sessione['numEsercizi'];
+            $percentuali[$k] = ($sessioni[$k]['cntErrori'] * 100 / $esercizi[$k]);
 
-                if(!isset($esercizi)){
-                    $esercizi = 0;
-                    }
-                    if(!isset($percentuali)){
-                    $percentuali =0;
-                    }
-            endfor;
+            if (!isset($esercizi)) {
+                $esercizi = 0;
+            }
+            if (!isset($percentuali)) {
+                $percentuali = 0;
+            }
+        endfor;
 
 
 
         return $this->render('progressi', [
-            'model' => $model, 
-            'sessioni' =>  $sessioni, 
-            'percentuali' =>  $percentuali, 
+            'model' => $model,
+            'sessioni' =>  $sessioni,
+            'percentuali' =>  $percentuali,
             'esercizi' =>  $esercizi,
         ]);
     }
 
     public function actionBacheca()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
+        }
+        $sessioni = Assegnazionesessione::find()
+            ->join('INNER JOIN', 'paziente', 'paziente.idPaziente = paziente')
+            ->where(['nuovo' => '1', 'paziente.logopedista' => Yii::$app->user->id])
+            ->orderBy(['paziente' => SORT_DESC])
+            ->all();
 
-        $sessioni= Assegnazionesessione::find()
-        ->where(['nuovo' => '1'])
-        ->orderBy(['paziente'=> SORT_DESC])
-        ->all();   
+        for ($k = 0; $k < sizeof($sessioni); $k++) :
 
-        for ($k = 0; $k < sizeof($sessioni); $k++) : 
-
-            $nomePaziente[$k] = Paziente::findOne(['idPaziente' => $sessioni[$k]->paziente])->nome;      
+            $nomePaziente[$k] = Paziente::findOne(['idPaziente' => $sessioni[$k]->paziente])->nome;
             $cognomePaziente[$k] = Paziente::findOne(['idPaziente' => $sessioni[$k]->paziente])->cognome;
-            $idPaziente[$k] = Paziente::findOne(['idPaziente' => $sessioni[$k]->paziente])->idPaziente;     
+            $idPaziente[$k] = Paziente::findOne(['idPaziente' => $sessioni[$k]->paziente])->idPaziente;
 
         endfor;
 
         return $this->render('bacheca', [
-            'sessioni' =>  $sessioni, 'nomePaziente' =>  $nomePaziente, 'cognomePaziente' =>  $cognomePaziente, 'idPaziente' =>  $idPaziente, 
+            'sessioni' =>  $sessioni, 'nomePaziente' =>  $nomePaziente, 'cognomePaziente' =>  $cognomePaziente, 'idPaziente' =>  $idPaziente,
         ]);
     }
-    
 }

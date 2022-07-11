@@ -13,10 +13,7 @@ use Yii;
 
 class SvolgimentoEserciziController extends \yii\web\Controller
 {
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+  
 
     public function actionSvolgiSessione($sessione, $paziente)
     {
@@ -46,7 +43,7 @@ class SvolgimentoEserciziController extends \yii\web\Controller
                 $model->save();
             }
             return $this->render('assegnazionesessione/view',['sessione'=>$sessione,'paziente'=>$paziente]);
-            //return $this->redirect(['index']);
+       
         } else {
             $model->loadDefaultValues();
         }

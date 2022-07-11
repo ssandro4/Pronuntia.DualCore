@@ -25,12 +25,14 @@ class GestioneEserciziController extends \yii\web\Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
         }
-
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
+        }
         $model = new Parola();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->refresh();
+                return $this->redirect('vocabolario');
             }
         } else {
             $model->loadDefaultValues();
@@ -46,8 +48,7 @@ class GestioneEserciziController extends \yii\web\Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
         }
-
-        if (Yii::$app->user->isGuest) {
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
             return $this->goHome();
         }
 
@@ -55,7 +56,7 @@ class GestioneEserciziController extends \yii\web\Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect('Url::previous()');
+                return $this->redirect(Url::previous());
             }
         } else {
             $model->loadDefaultValues();
@@ -68,7 +69,12 @@ class GestioneEserciziController extends \yii\web\Controller
 
     public function actionVocabolario()
     {
-
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
+        }
         $searchModel = new ParolaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -77,18 +83,22 @@ class GestioneEserciziController extends \yii\web\Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
     public function actionCreaEsercizio()
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
         }
 
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
+        }
         $model = new Esercizio();
         $model->logopedista = Yii::$app->user->identity->id;
         Url::remember();
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->refresh();
+                return $this->render('view-esercizi');
             }
         } else {
             $model->loadDefaultValues();
@@ -103,6 +113,10 @@ class GestioneEserciziController extends \yii\web\Controller
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
+        }
+
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
         }
         $model = new Esercizio();
         $model->logopedista = Yii::$app->user->identity->id;
@@ -123,6 +137,10 @@ class GestioneEserciziController extends \yii\web\Controller
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
+        }
+
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
         }
         $model1 = new Sessione();
         $model1->logopedista = Yii::$app->user->identity->id;
@@ -145,6 +163,10 @@ class GestioneEserciziController extends \yii\web\Controller
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
+        }
+
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
         }
         $numEsercizi = $this->findSessione($sessione)->numEsercizi;
         $arrModels = array();
@@ -176,6 +198,11 @@ class GestioneEserciziController extends \yii\web\Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
         }
+
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
+        }
+
         $model = new Assegnazionesessione();
         $model->sessione = $sessione;
         $model->paziente = $paziente;
@@ -191,7 +218,7 @@ class GestioneEserciziController extends \yii\web\Controller
                     ->setHtmlBody('Salve,<br/>su Pronuntia sono disponibili nuovi esercizi da svolgere per ' . $paziente->getNomeECognome() . '.<br/>
                 Eseguiteli al più presto!<br/><br/><i>' . $logopedista->nome . ' ' . $logopedista->cognome . '</i>')
                     ->send();
-                return $this->redirect(['view', 'sessione' => $model->sessione, 'paziente' => $model->paziente]);
+                return $this->redirect(['/controllo-terapia/bacheca']);
             }
         } else {
             $model->loadDefaultValues();
@@ -203,20 +230,20 @@ class GestioneEserciziController extends \yii\web\Controller
     }
 
 
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
-
-    public function actionModificaParola($idParola)
+     public function actionModificaParola($idParola)
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
         }
+
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
+        }
+
         $model = $this->findParola($idParola);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->refresh();
+            return $this->redirect('vocabolario');
         }
 
         return $this->render('modifica-parola', [
@@ -226,6 +253,13 @@ class GestioneEserciziController extends \yii\web\Controller
 
     public function actionViewEsercizi()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
+
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
+        }
 
         $searchModel = new EsercizioSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
@@ -238,6 +272,16 @@ class GestioneEserciziController extends \yii\web\Controller
 
     public function actionViewSessione($idSessione)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/site/login-logopedista');
+        }
+
+        if (Yii::$app->user->identity->tipo == 'caregiver') {
+            return $this->goHome();
+        }
+        if (Sessione::findOne(['idSessione' => $idSessione])->logopedista != Yii::$app->user->id) {
+            return $this->goHome();
+        }
         $searchModel = new ComposizionesessioneSearch();
         // $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider = $searchModel->searchBySessione($idSessione);

@@ -79,7 +79,6 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
                     ['label' => 'Login Caregiver', 'url' => ['/site/login-caregiver']],
                     ['label' => 'Login Logopedista', 'url' => ['/site/login-logopedista']],
@@ -96,7 +95,6 @@ AppAsset::register($this);
                     
                     ['label' => 'I tuoi pazienti', 'url' => ['/gestione-utenti/index-caregiver']],
                     
-                    ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
                     ('<li>'
                         . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
@@ -126,7 +124,6 @@ AppAsset::register($this);
                     
                     ['label' => 'Pazienti', 'url'=> ['/gestione-utenti/index-logopedista']],
                     
-                    ['label' => 'About', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'url' => ['/site/contact']],
                     ('<li>'
                         . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])

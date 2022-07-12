@@ -39,6 +39,7 @@ $this->title = 'Pronuntia';
         background: white;
         padding: 10px;
         font-size: 25px;
+        
     }
 
     .btn {

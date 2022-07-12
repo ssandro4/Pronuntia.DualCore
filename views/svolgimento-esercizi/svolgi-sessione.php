@@ -17,6 +17,14 @@ use yii\bootstrap4\Modal;
 ?>
 
 <style>
+    .padding {
+        max-width: 50rem;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
     .center {
         margin: 30 auto;
         margin-left: auto;
@@ -29,6 +37,36 @@ use yii\bootstrap4\Modal;
         margin-left: auto;
         margin-right: auto;
         text-align: right;
+        padding: 7px;
+    }
+
+    .red {
+        background-color: coral;
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 8px;
+        border: 5px;
+        padding: 7px;
+    }
+
+    .yellow {
+        background-color: yellow;
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 8px;
+        border: 5px;
+        padding: 7px;
+    }
+
+    .green {
+        background-color: greenyellow;
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 8px;
+        border: 5px;
         padding: 7px;
     }
 
@@ -79,43 +117,52 @@ use yii\bootstrap4\Modal;
 
     <?php $form = ActiveForm::begin(); ?>
     <?php for ($k = 0; $k < sizeof($esercizi); $k++) : ?>
-        <div class="card">
+        <div class="padding">
 
-            <div class="center">
-
-                <?php if ($esercizi[$k]->tipo == 'Audio') : ?>
-                    <div>
-                        <?php echo $this->render('_esercizioAudio', ['esercizio' => $esercizi[$k]]); ?>
-                    </div>
-
-                <?php elseif ($esercizi[$k]->tipo == 'Immagine') : ?>
-                    <div>
-                        <?php echo $this->render('_esercizioImmagine', ['esercizio' => $esercizi[$k]]); ?>
-                    </div>
-
-                <?php elseif ($esercizi[$k]->tipo == 'Coppia Minima') : ?>
-                    <div>
-                        <?php echo $this->render('_esercizioCoppia', ['esercizio' => $esercizi[$k]]); ?>
-                    </div>
-
-                <?php else : ?>
-                    Nothing
-                <?php endif; ?>
+            <div class="card">
 
                 <div class="center">
 
-                </div>
+                    <?php if ($esercizi[$k]->tipo == 'Audio') : ?>
+                        <div class="red">
 
-                <div class="bigfont">
-                    <p>Che valutazione daresti?</p>
+                            <?php echo $this->render('_esercizioAudio', ['esercizio' => $esercizi[$k]]); ?>
 
-                    <div class="biggertext">
-                        <?php echo Html::radioList('esiti[' . $k . ']', false,  [false => 'Positiva', true => 'Negativa'], ['separator' => '', 'tabindex' => 2,]) ?>
+                        </div>
+
+                    <?php elseif ($esercizi[$k]->tipo == 'Immagine') : ?>
+                        <div class="yellow">
+
+                            <?php echo $this->render('_esercizioImmagine', ['esercizio' => $esercizi[$k]]); ?>
+
+                        </div>
+
+                    <?php elseif ($esercizi[$k]->tipo == 'Coppia Minima') : ?>
+                        <div class="green">
+
+                            <?php echo $this->render('_esercizioCoppia', ['esercizio' => $esercizi[$k]]); ?>
+
+                        </div>
+
+                    <?php else : ?>
+                        Nothing
+                    <?php endif; ?>
+
+                    <div class="center">
+
                     </div>
 
+                    <div class="bigfont">
+                        <p>Che valutazione daresti?</p>
+
+                        <div class="biggertext">
+                            <?php echo Html::radioList('esiti[' . $k . ']', false,  [false => 'Positiva', true => 'Negativa'], ['separator' => '', 'tabindex' => 2,]) ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div>
         </div>
     <?php endfor; ?>

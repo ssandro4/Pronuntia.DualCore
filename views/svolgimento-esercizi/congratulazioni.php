@@ -45,11 +45,11 @@
 <div class='center'>
     <div class='padding'>
         <div class='biggerfont'>
-            <h1>CONGRATULAZIONI!</h1>
+            <h2>CONGRATULAZIONI!</h2>
         </div>
 
         <img class="fit-picture"
-     src="https://media.baamboozle.com/uploads/images/508833/1646155474_36203_gif-url.gif"     width="590" 
+     src="https://media.baamboozle.com/uploads/images/508833/1646155474_36203_gif-url.gif"     width="400" 
      height="auto">
 
     </div>

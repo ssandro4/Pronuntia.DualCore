@@ -76,19 +76,19 @@ use yii\bootstrap4\Modal;
         <html>
         <body>
         
-        <p>Gli esercizi da svolgere possono essere di tre tipi.
+        <p align='left'>Gli esercizi da svolgere possono essere di tre tipi.
         <ul>
-        <li>Gli esercizi in cui il paziente vedendo l'<b>immagine</b> deve pronunciare la parola.<br />
+        <li align='left'>Gli esercizi in cui il paziente vedendo l'<b>immagine</b> deve pronunciare la parola.<br />
         Nel caso l'immagine risulti ambigua (ad esempio è raffigurata una scuola ma il bambino dice 'palazzo') il bambino può ricevere suggerimenti.</li>
         <br />
-        <li>Gli esercizi in cui il paziente <b>ascoltando</b> la parola deve ripeterla. Nel caso il contenuto multimediale non sia presente è compito del caregiver
+        <li align='left'>Gli esercizi in cui il paziente <b>ascoltando</b> la parola deve ripeterla. Nel caso il contenuto multimediale non sia presente è compito del caregiver
         leggere la parola affinchè il bambino possa ripeterla.</li>
         <br />
-        <li>Gli esercizi formati da <b>coppie di parole</b> in cui il bambino ascoltando la parola giusta deve indicare la risposta esatta tra le due immagini proposte.
+        <li align='left'>Gli esercizi formati da <b>coppie di parole</b> in cui il bambino ascoltando la parola giusta deve indicare la risposta esatta tra le due immagini proposte.
         Anche in questo caso se il contenuto multimediale non dovesse essere presente sarà compito del caregiver pronunciare la parola.</li>
         </ul>
         </p>
-        <p>Per ogni esercizio è possibile dare un esito positivo o negativo. Nel caso l'esito risulti incerto per un qualsivoglia motivo si consiglia di segnare l'esito come negativo e 
+        <p align='left'>Per ogni esercizio è possibile dare un esito positivo o negativo. Nel caso l'esito risulti incerto per un qualsivoglia motivo si consiglia di segnare l'esito come negativo e 
         di segnalare la problematica nel campo '<b>Nota</b>' in fondo alla pagina indicando la parola con cui il paziente ha avuto difficoltà e 
         il tipo di problema incontrato.
         </body></html>";;

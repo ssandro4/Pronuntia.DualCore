@@ -13,14 +13,20 @@ use Yii;
 
 class SvolgimentoEserciziController extends \yii\web\Controller
 {
-  
+
 
     public function actionSvolgiSessione($sessione, $paziente)
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-caregiver');
         }
+        if (Paziente::findOne(['idPaziente' => $paziente])->caregiver != Yii::$app->user->id) {
+            return $this->goHome();
+        }
         $model = $this->findAssegnazioneSessione($sessione, $paziente);
+        if (!$model->nuovo){
+            return $this->goHome();
+        }
         $esercizi = $model->getSessione0()->one()->getEsercizios()->all();
         $parole = array();
         for ($k = 0; $k < sizeof($esercizi); $k++) {
@@ -29,21 +35,20 @@ class SvolgimentoEserciziController extends \yii\web\Controller
         if ($this->request->isPost) {
             $model->load($this->request->post());
             $model->elencoErrori = '';
-            $model->cntErrori=0;
+            $model->cntErrori = 0;
             for ($k = 0; $k < sizeof($esercizi); $k++) {
                 if ($_POST['esiti'][$k] == 1) {
                     $model->cntErrori++;
                     $model->elencoErrori .= $parole[$k] . '<br />';
                 }
             }
-            $model->esito = 'Il paziente '.Paziente::findOne(['idPaziente' => $paziente])->getNomeECognome().' in '.sizeof($esercizi).'
-            esercizi ha avuto difficoltà con '.$model->cntErrori.' parole, ovvero: '.$model->elencoErrori;
-            if($model->save()){
-                $model->nuovo=0;
+            $model->esito = 'Il paziente ' . Paziente::findOne(['idPaziente' => $paziente])->getNomeECognome() . ' in ' . sizeof($esercizi) . '
+            esercizi ha avuto difficoltà con ' . $model->cntErrori . ' parole, ovvero: ' . $model->elencoErrori;
+            if ($model->save()) {
+                $model->nuovo = 0;
                 $model->save();
             }
-            return $this->render('congratulazioni',['paziente'=>$paziente]);
-       
+            return $this->render('congratulazioni', ['paziente' => $paziente]);
         } else {
             $model->loadDefaultValues();
         }
@@ -70,7 +75,7 @@ class SvolgimentoEserciziController extends \yii\web\Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    
+
     public function actionCongratulazioni()
     {
         return $this->render('congratulazioni');

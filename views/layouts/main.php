@@ -39,8 +39,7 @@ AppAsset::register($this);
     }
 
     .my-navbar {
-        background-color: #0D0044;
-        color: #555555;
+        background-color: #363636;
     }
 </style>
 

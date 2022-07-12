@@ -21,6 +21,11 @@ use yii\controllers\ControlloTerapiaController;
         padding: 4px;
     }
 
+    .red {
+        background-color: red;
+
+    }
+
     td,
     th {
         border: 1px solid black;
@@ -49,7 +54,17 @@ use yii\controllers\ControlloTerapiaController;
             <tr>
                 <td> <a href=<?php echo '/controllo-terapia/progressi?idPaziente=' . $idPaziente[$k] ?>><?php echo $nomePaziente[$k]; ?> <?php echo $cognomePaziente[$k]; ?></td>
                 <td><?php echo $sessioni[$k]['sessione']; ?></td>
-                <td><?php echo $sessioni[$k]['dataCreazione'] ?> </td>
+                <td><?php echo date('d/m/Y', $timestamp = strtotime($sessioni[$k]['dataCreazione'])) ?></td>
+
+                <?php 
+                $dataOggi = date("Y/m/d");
+                $differenza = -floor((strtotime($sessioni[$k]['dataCreazione']) - strtotime($dataOggi)) / 86400);
+                ?>
+                <?php if ($differenza>=5) : ?>
+                    <td> <div class='red'> assegnata <?php echo $differenza; ?> giorni fa</div></td>
+                    <?php else : ?>
+                    <td>assegnata <?php echo $differenza; ?> giorni fa</td>
+                <?php endif; ?>
             </tr>
 
         <?php endfor; ?>

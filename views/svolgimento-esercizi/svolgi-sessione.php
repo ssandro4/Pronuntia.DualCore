@@ -22,6 +22,21 @@ use yii\bootstrap4\Modal;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
+        padding: 7px;
+    }
+
+    .side {
+        margin-left: auto;
+        margin-right: auto;
+        text-align: right;
+        padding: 7px;
+    }
+
+    .body {
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 7px;
     }
 
     .bigfont {
@@ -45,81 +60,84 @@ use yii\bootstrap4\Modal;
         padding: 7px;
     }
 </style>
-<?php
 
-Modal::begin([
-    'title' => '<h2>Guida esercizi</h2>',
-    'toggleButton' => ['label' => 'Problemi con gli esercizi?', 'class' => 'btn-info btn-sm'],
-    'closeButton' => [
-        'label' => 'Chiudi',
-        'class' => 'btn-danger btn-sm pull-right',
-    ]
-]);
+<div class="body">
+    <div class="side">
+        <?php
+        Modal::begin([
+            'title' => '<h2>Guida esercizi</h2>',
+            'toggleButton' => ['label' => 'Problemi con gli esercizi?', 'class' => 'btn-info btn-sm'],
+            'closeButton' => [
+                'label' => 'Chiudi',
+                'class' => 'btn-danger btn-sm',
+            ]
+        ]);
+        echo 'Say hello...';
+        Modal::end();
+        ?>
+    </div>
 
-echo 'Say hello...';
-
-Modal::end();
-$form = ActiveForm::begin();
-?>
-<?php for ($k = 0; $k < sizeof($esercizi); $k++) : ?>
-    <div class="card">
-
-        <div class="center">
-
-            <?php if ($esercizi[$k]->tipo == 'Audio') : ?>
-                <div>
-                    <?php echo $this->render('_esercizioAudio', ['esercizio' => $esercizi[$k]]); ?>
-                </div>
-
-            <?php elseif ($esercizi[$k]->tipo == 'Immagine') : ?>
-                <div>
-                    <?php echo $this->render('_esercizioImmagine', ['esercizio' => $esercizi[$k]]); ?>
-                </div>
-
-            <?php elseif ($esercizi[$k]->tipo == 'Coppia Minima') : ?>
-                <div>
-                    <?php echo $this->render('_esercizioCoppia', ['esercizio' => $esercizi[$k]]); ?>
-                </div>
-
-            <?php else : ?>
-                Nothing
-            <?php endif; ?>
+    <?php $form = ActiveForm::begin(); ?>
+    <?php for ($k = 0; $k < sizeof($esercizi); $k++) : ?>
+        <div class="card">
 
             <div class="center">
 
-            </div>
+                <?php if ($esercizi[$k]->tipo == 'Audio') : ?>
+                    <div>
+                        <?php echo $this->render('_esercizioAudio', ['esercizio' => $esercizi[$k]]); ?>
+                    </div>
 
-            <div class="bigfont">
-                <p>Che valutazione daresti?</p>
+                <?php elseif ($esercizi[$k]->tipo == 'Immagine') : ?>
+                    <div>
+                        <?php echo $this->render('_esercizioImmagine', ['esercizio' => $esercizi[$k]]); ?>
+                    </div>
 
-                <div class="biggertext">
-                    <?php echo Html::radioList('esiti[' . $k . ']', false,  [false => 'Positiva', true => 'Negativa'], ['separator' => '', 'tabindex' => 2,]) ?>
+                <?php elseif ($esercizi[$k]->tipo == 'Coppia Minima') : ?>
+                    <div>
+                        <?php echo $this->render('_esercizioCoppia', ['esercizio' => $esercizi[$k]]); ?>
+                    </div>
+
+                <?php else : ?>
+                    Nothing
+                <?php endif; ?>
+
+                <div class="center">
+
                 </div>
 
+                <div class="bigfont">
+                    <p>Che valutazione daresti?</p>
+
+                    <div class="biggertext">
+                        <?php echo Html::radioList('esiti[' . $k . ']', false,  [false => 'Positiva', true => 'Negativa'], ['separator' => '', 'tabindex' => 2,]) ?>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
+        <div>
+        </div>
+    <?php endfor; ?>
     <div>
-        .</div>
-<?php endfor; ?>
-<div>
-    .</div>
-
-<div class="center">
-    <div class="card">
-        <div class="center">
-            <form action="/action_page.php">
-                <h4>Nota</h4>
-
-                <?php echo Html::activeTextarea($model, 'note') ?>
-        </div>
-        </form>
-        <div class="center">
-            <button type="submit" style="width: 90px; border-radius: 9px; background-color:
-     #3399ff; border: 2px solid black;padding: 7px;" onclick="alert('Risultati Sessione Inviati')">Avanti! </button>
-        </div>
-        <!-- < ?=Html::submitButton('Submit', ['class'=> 'submit'], ) ?> -->
     </div>
-</div>
+
+    <div class="center">
+        <div class="card">
+            <div class="center">
+                <form action="/action_page.php">
+                    <h4>Nota</h4>
+
+                    <?php echo Html::activeTextarea($model, 'note') ?>
+            </div>
+            </form>
+            <div class="center">
+                <button type="submit" style="width: 90px; border-radius: 9px; background-color:
+     #3399ff; border: 2px solid black;padding: 7px;" onclick="alert('Risultati Sessione Inviati')">Avanti! </button>
+            </div>
+            <!-- < ?=Html::submitButton('Submit', ['class'=> 'submit'], ) ?> -->
+        </div>
+    </div>
 </div>
 <?php $form->end(); ?>
+</div>

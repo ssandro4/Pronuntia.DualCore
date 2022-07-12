@@ -9,6 +9,7 @@ use app\models\Sessione;
 use app\models\Composizionesessione;
 use views\esercizio\_esercizioAudio;
 use yii\widgets\ActiveForm;
+use yii\bootstrap4\Modal;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Esercizio */
@@ -46,6 +47,18 @@ use yii\widgets\ActiveForm;
 </style>
 <?php
 
+Modal::begin([
+    'title' => '<h2>Guida esercizi</h2>',
+    'toggleButton' => ['label' => 'Problemi con gli esercizi?', 'class' => 'btn-info btn-sm'],
+    'closeButton' => [
+        'label' => 'Chiudi',
+        'class' => 'btn-danger btn-sm pull-right',
+    ]
+]);
+
+echo 'Say hello...';
+
+Modal::end();
 $form = ActiveForm::begin();
 ?>
 <?php for ($k = 0; $k < sizeof($esercizi); $k++) : ?>

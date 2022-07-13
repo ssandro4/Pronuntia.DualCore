@@ -100,7 +100,7 @@ class GestioneEserciziController extends \yii\web\Controller
             if ($model->load($this->request->post()) && $model->save()) {
                 $searchModel = new EsercizioSearch();
                 $dataProvider = $searchModel->searchByLogopedista(Yii::$app->user->identity->id);
-                return $this->render('view-esercizi', [
+                return $this->render('lista-esercizi', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                 ]);

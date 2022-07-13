@@ -9,18 +9,10 @@ use yii\widgets\ListView;
 /* @var $searchModel app\models\EsercizioSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Esercizi';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="esercizio-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Esercizio', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php echo $this->render('_search-esercizi', ['model' => $searchModel]); ?>
 
     <?= ListView::widget([
         'dataProvider' => $dataProvider,

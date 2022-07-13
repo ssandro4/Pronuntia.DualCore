@@ -63,4 +63,31 @@ class EsercizioSearch extends Esercizio
 
         return $dataProvider;
     }
+
+    public function searchByLogopedista($idLogopedista)
+    {
+        $query = Esercizio::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query->where(['logopedista'=>$idLogopedista]),
+        ]);
+
+        $this->load($idLogopedista);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere(['like', 'idEsercizio', $this->idEsercizio])
+            ->andFilterWhere(['like', 'parola', $this->parola])
+            ->andFilterWhere(['like', 'parola2', $this->parola2])
+            ->andFilterWhere(['like', 'tipo', $this->tipo]);
+
+        return $dataProvider;
+    }
 }

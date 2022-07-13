@@ -98,7 +98,12 @@ class GestioneEserciziController extends \yii\web\Controller
         Url::remember();
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->render('view-esercizi');
+                $searchModel = new EsercizioSearch();
+                $dataProvider = $searchModel->searchByLogopedista(Yii::$app->user->identity->id);
+                return $this->render('view-esercizi', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                ]);
             }
         } else {
             $model->loadDefaultValues();

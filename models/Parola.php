@@ -33,7 +33,7 @@ class Parola extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idParola'], 'required'],
+            [['idParola', 'pathIMG'], 'required'],
             [['idParola'], 'string', 'max' => 24],
             [['tag'], 'string', 'max' => 52],
             [['pathIMG', 'pathMP3'], 'string', 'max' => 256],

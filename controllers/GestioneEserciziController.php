@@ -170,7 +170,7 @@ class GestioneEserciziController extends \yii\web\Controller
             return $this->redirect('/site/login-logopedista');
         }
 
-        if (Yii::$app->user->identity->tipo == 'caregiver') {
+        if (Yii::$app->user->id != $this->findSessione($sessione)->logopedista) {
             return $this->goHome();
         }
         $numEsercizi = $this->findSessione($sessione)->numEsercizi;

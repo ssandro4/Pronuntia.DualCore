@@ -35,6 +35,10 @@ class GestioneUtentiController extends \yii\web\Controller
             'model' => $model,
         ]);
     }
+
+    public function actionViewProfiloPaziente($idPaziente){
+        return $this->render('view-profilo-paziente',['model'=>Paziente::findOne(['idPaziente'=>$idPaziente])]);
+    }
     public function actionCreaProfiloCaregiverPopup()
     {
         if (Yii::$app->user->isGuest) {

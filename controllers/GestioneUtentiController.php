@@ -36,9 +36,6 @@ class GestioneUtentiController extends \yii\web\Controller
         ]);
     }
 
-    public function actionViewProfiloPaziente($idPaziente){
-        return $this->render('view-profilo-paziente',['model'=>Paziente::findOne(['idPaziente'=>$idPaziente])]);
-    }
     public function actionCreaProfiloCaregiverPopup()
     {
         if (Yii::$app->user->isGuest) {
@@ -79,7 +76,7 @@ class GestioneUtentiController extends \yii\web\Controller
         $model->logopedista = Yii::$app->user->identity->id;
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view-profilo-paziente', 'idPaziente' => $model->idPaziente]);
+                return $this->redirect('index-logopedista');
             }
         } else {
             $model->loadDefaultValues();
@@ -103,7 +100,7 @@ class GestioneUtentiController extends \yii\web\Controller
         }
         $model = $this->findPaziente($idPaziente);
         if ($model->logopedista != Yii::$app->user->id) {
-            return $this->goHome();
+            return $this->redirect('index-logopedista');
         }
         $model->visibile = false;
         $model->save();

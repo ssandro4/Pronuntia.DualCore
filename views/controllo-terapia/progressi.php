@@ -12,17 +12,19 @@ use yii\widgets\DetailView;
         margin-left: auto;
         margin-right: auto;
         text-align: center;
+        padding: 15px;
     }
 
 
-    .btn{
+    .btn {
         border-radius: 8px;
-        border: 2px ;
+        border: 2px;
         padding: 15px;
         text-align: center;
-        background-color: #555555;    
+        background-color: #555555;
         font-size: 20px;
     }
+
     .progress-bar {
         background-color: #B20000;
     }
@@ -85,3 +87,13 @@ use yii\widgets\DetailView;
         </p>
     <?php endif; ?>
 <?php endfor; ?>
+
+<?php if ($percentuali == 0) : ?>
+    
+    <div class="card" style="max-width: 40rem; 
+            margin-right: auto;  border-radius: 7px;   border: 1px solid black; background: white;">
+        <div class="box" style=" padding: 7px;">
+            Il paziente non ha svolto alcun Esercizio
+        </div>
+    </div>
+<?php endif; ?>

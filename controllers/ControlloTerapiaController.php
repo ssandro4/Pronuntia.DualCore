@@ -32,15 +32,14 @@ class ControlloTerapiaController extends \yii\web\Controller
             $esercizi[$k] =  $sessione['numEsercizi'];
             $percentuali[$k] = ($sessioni[$k]['cntErrori'] * 100 / $esercizi[$k]);
 
-            if (!isset($esercizi)) {
-                $esercizi = 0;
-            }
-            if (!isset($percentuali)) {
-                $percentuali = 0;
-            }
         endfor;
 
-
+        if (!isset($esercizi)) {
+            $esercizi = 0;
+        }
+        if (!isset($percentuali)) {
+            $percentuali = 0;
+        }
 
         return $this->render('progressi', [
             'model' => $model,
@@ -78,25 +77,24 @@ class ControlloTerapiaController extends \yii\web\Controller
         ]);
     }
 
-    
+
     public function actionSessioni($idPaziente)
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-caregiver');
         }
-        
+
         $sessioni = Assegnazionesessione::find()
             ->where(['paziente' => $idPaziente])
             ->andwhere(['nuovo' => 1])
             ->orderBy(['paziente' => SORT_DESC])
             ->all();
 
-            $nomePaziente = Paziente::findOne(['idPaziente' => $idPaziente])->nome;
-            $cognomePaziente = Paziente::findOne(['idPaziente' => $idPaziente])->cognome;
+        $nomePaziente = Paziente::findOne(['idPaziente' => $idPaziente])->nome;
+        $cognomePaziente = Paziente::findOne(['idPaziente' => $idPaziente])->cognome;
 
         return $this->render('sessioni', [
-            'sessioni' =>  $sessioni,'idPaziente' =>  $idPaziente,'nomePaziente' =>  $nomePaziente, 'cognomePaziente' =>  $cognomePaziente,
+            'sessioni' =>  $sessioni, 'idPaziente' =>  $idPaziente, 'nomePaziente' =>  $nomePaziente, 'cognomePaziente' =>  $cognomePaziente,
         ]);
     }
-
 }

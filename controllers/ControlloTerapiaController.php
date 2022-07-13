@@ -83,6 +83,8 @@ class ControlloTerapiaController extends \yii\web\Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-caregiver');
         }
+        if (Yii::$app->user->identity->tipo != 'caregiver')
+            return $this->goHome();
 
         $sessioni = Assegnazionesessione::find()
             ->where(['paziente' => $idPaziente])

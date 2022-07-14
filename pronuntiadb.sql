@@ -41,7 +41,7 @@ CREATE TABLE paziente (
 CREATE TABLE Parola (
     idParola VARCHAR(24) PRIMARY KEY,
     tag VARCHAR(52),
-    pathIMG VARCHAR(256),
+    pathIMG VARCHAR(256) not null,
     pathMP3 VARCHAR(256)
 );
 

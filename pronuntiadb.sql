@@ -99,12 +99,12 @@ CREATE TABLE AssegnazioneSessione (
 );
 
 insert into Logopedista values
-(1001,"Mario","Rossi", "mar.rosso@libero.it","LogoLoco","test200key","200-token"),
+(1001,"Mario","Rossi", "mar.rosso@libero.it","Mario.Rossi","test200key","200-token"),
 (1002,"Giovanni","Bianchi", "gio.bianchi@libero.it","password1","test201key","201-token");
 
 insert into Caregiver (nome,cognome,email,password,authKey,accessToken) values
-("Giovanni","Marroni", "giov.mar@gmail.com","Ketchup3Maionese","test100key","100-token"),
-("Simone","Verdi","simo.ver@tiscali.it","SimoneLimone","test101key","101-token");
+("Giovanni","Marroni", "giov.mar@gmail.com","Caregiver1","test100key","100-token"),
+("Simone","Verdi","simo.ver@tiscali.it","Caregiver2","test101key","101-token");
 
 drop table if exists Utente;
 
@@ -126,7 +126,7 @@ FROM
     utente;
 
 insert into Paziente value
-(1,"Pino","Pini","dislessia, discalculia",1,1001, true);
+(1,"Domenico","Gialli","dislessia, discalculia",1,1001, true);
 insert into parola (idparola, pathIMG) values
 ("Cane",'http://www.veterinarimatera.it/wp-content/uploads/2021/03/cane-1.jpg'),
 ("Serpente",'https://as2.ftcdn.net/v2/jpg/00/46/08/69/1000_F_46086991_yOEe4Zbqdt6K8eOR9vUGkR3M40NPHBQ5.jpg'),

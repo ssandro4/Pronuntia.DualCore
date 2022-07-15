@@ -10,10 +10,10 @@ use Yii;
  * This is the model class for table "Caregiver".
  *
  * @property int $idCaregiver
- * @property string|null $nome
- * @property string|null $cognome
- * @property string|null $email
- * @property string|null $password
+ * @property string $nome
+ * @property string $cognome
+ * @property string $email
+ * @property string $password
  */
 class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
 {
@@ -35,6 +35,7 @@ class Caregiver extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterf
         return [
             //    [['idCaregiver'], 'required'],
             //     [['idCaregiver'], 'integer'],
+            [['nome', 'cognome', 'email', 'password'], 'required'],
             [['nome', 'cognome', 'email'], 'string', 'max' => 24],
             [['password'], 'string', 'max' => 16],
             ['email', 'email'],

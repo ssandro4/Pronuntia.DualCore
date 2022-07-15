@@ -8,10 +8,10 @@ use Yii;
  * This is the model class for table "logopedista".
  *
  * @property int $idLogopedista
- * @property string|null $nome
- * @property string|null $cognome
- * @property string|null $email
- * @property string|null $password
+ * @property string $nome
+ * @property string $cognome
+ * @property string $email
+ * @property string $password
  * @property string|null $authKey 
  * @property string|null $accessToken 
  *
@@ -37,6 +37,7 @@ class Logopedista extends \yii\db\ActiveRecord  implements \yii\web\IdentityInte
         return [
             //    [['idLogopedista'], 'required'],
             [['idLogopedista'], 'integer'],
+            [['nome', 'cognome', 'email', 'password'], 'required'],
             [['nome', 'cognome'], 'string', 'max' => 24],
             [['email'], 'email'],
             [['password'], 'string', 'max' => 16],

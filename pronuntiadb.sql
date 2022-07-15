@@ -5,20 +5,20 @@ use pronuntiadb;
 
 CREATE TABLE Logopedista (
     idLogopedista INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(24),
-    cognome VARCHAR(24),
-    email VARCHAR(24),
-    password VARCHAR(16),
+    nome VARCHAR(24) not null,
+    cognome VARCHAR(24) not null,
+    email VARCHAR(24) not null,
+    password VARCHAR(16) not null,
     authKey VARCHAR(12),
     accessToken VARCHAR(9)
 );
 
 CREATE TABLE Caregiver (
     idCaregiver INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(24),
-    cognome VARCHAR(24),
-    email VARCHAR(24),
-    password VARCHAR(16),
+    nome VARCHAR(24) not null,
+    cognome VARCHAR(24) not null,
+    email VARCHAR(24) not null,
+    password VARCHAR(16) not null,
     visibile boolean default true not null,
     authKey VARCHAR(12),
     accessToken VARCHAR(9)

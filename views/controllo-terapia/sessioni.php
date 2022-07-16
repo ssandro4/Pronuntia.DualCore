@@ -68,7 +68,7 @@ use yii\controllers\ControlloTerapiaController;
 
                     <h3> <?php echo $sessioni[$k]['sessione']; ?> assegnata il <?php echo $sessioni[$k]['dataCreazione'] ?> </h3>
 
-                    <a class='btn' href=<?php echo '/svolgimento-esercizi/svolgi-sessione/?sessione='.Html::encode($sessioni[$k]['sessione']).'&paziente='.$idPaziente?>>Svolgi Sessione</a>
+                    <a class='btn' href=<?php echo '/svolgimento-esercizi/svolgi-sessione/?sessione='.urlencode($sessioni[$k]['sessione']).'&paziente='.$idPaziente?>>Svolgi Sessione</a>
 
                 </div>
             </div>

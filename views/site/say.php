@@ -2,6 +2,7 @@
 
 use app\models\Caregiver;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use app\models\Logopedista;
 use app\models\Parola;
 use app\models\Paziente;
@@ -18,7 +19,7 @@ use yii\helpers\ArrayHelper;
 
 
 <?php
-
+echo urlencode('ciao mi chiamo gianni');
 if (Yii::$app->user->id === Yii::$app->user->identity->id)
 echo 'true<br>';
 

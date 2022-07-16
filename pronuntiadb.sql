@@ -45,7 +45,7 @@ CREATE TABLE Parola (
     pathMP3 VARCHAR(256)
 );
 
-insert into parola (idParola) value ('Parola2');
+insert into parola (idParola, pathIMG) value ('Parola2','https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Empty_set.svg/1024px-Empty_set.svg.png');
 
 CREATE TABLE Esercizio (
     idEsercizio VARCHAR(52) PRIMARY KEY,

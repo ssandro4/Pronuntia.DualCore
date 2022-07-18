@@ -76,7 +76,6 @@ AppAsset::register($this);
                     'options' => ['class' => 'navbar-nav'],
                     'items' => [
                         ['label' => 'Home', 'url' => ['/site/index']],
-                        ['label' => 'Contact', 'url' => ['/site/contact']],
                         ['label' => 'Login Caregiver', 'url' => ['/site/login-caregiver']],
                         ['label' => 'Login Logopedista', 'url' => ['/site/login-logopedista']],
                     ],
@@ -88,10 +87,8 @@ AppAsset::register($this);
                     'items' => [
                         ['label' => 'Home', 'url' => ['/site/index']],
                         ['label' => 'Modifica i tuoi dati', 'url' => ['/gestione-utenti/modifica-profilo-caregiver?idCaregiver=' . Yii::$app->user->identity->id]],
-
                         ['label' => 'I tuoi pazienti', 'url' => ['/gestione-utenti/index-caregiver']],
 
-                        ['label' => 'Contact', 'url' => ['/site/contact']],
                         ('<li>'
                             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
                             . Html::submitButton(
@@ -117,10 +114,7 @@ AppAsset::register($this);
                         ['label' => 'Crea Esercizio', 'url' => ['/gestione-esercizi/crea-esercizio']],
                         ['label' => 'Crea Sessione', 'url' => ['/gestione-esercizi/crea-sessione']],
                         ['label' => 'Vocabolario', 'url' => ['/gestione-esercizi/vocabolario']],
-
                         ['label' => 'Pazienti', 'url' => ['/gestione-utenti/index-logopedista']],
-
-                        ['label' => 'Contact', 'url' => ['/site/contact']],
                         ('<li>'
                             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
                             . Html::submitButton(

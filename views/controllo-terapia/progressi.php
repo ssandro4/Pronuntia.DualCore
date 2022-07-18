@@ -77,8 +77,6 @@ use yii\widgets\DetailView;
                 <div> Sessione: <?php echo $sessioni[$k]['sessione']; ?> </div>
                 <div> Esito: <?php echo $sessioni[$k]['esito']; ?></div>
 
-                <!--    <div> errori: < ?php echo $sessioni[$k]['elencoErrori']; ?></div> -->
-
                 <div> Numero esercizi sbagliati: <?php echo $sessioni[$k]['cntErrori'] ?>
                     su <?php echo $esercizi[$k]; ?></div>
                 <div> Nota Caregiver: <?php echo $sessioni[$k]['note']; ?></div>

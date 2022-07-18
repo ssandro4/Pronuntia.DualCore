@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Assegnazionesessione */
 
-//$this->title = 'Create Assegnazionesessione';
+
 ?>
 <div class="assegnazionesessione-create">
 

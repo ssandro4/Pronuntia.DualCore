@@ -2,17 +2,15 @@
 
 namespace app\controllers;
 
-use app\models\Caregiver;
+
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 use app\models\LoginFormLogopedista;
 use app\models\LoginFormCaregiver;
-use app\models\User;
+
 
 class SiteController extends Controller
 {
@@ -69,27 +67,11 @@ class SiteController extends Controller
     }
 
     /**
-     * Login action.
+     * Login actions.
      *
      * @return Response|string
      */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
+    
     public function actionLoginLogopedista()
     {
 
@@ -138,36 +120,9 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+    
 
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
-
- 
 
     public function actionQuestionario()
     {
@@ -179,44 +134,7 @@ class SiteController extends Controller
     return Yii::$app->response->sendFile(Yii::getAlias('@app/src/tvl.pdf'));
     }
     
-    public function actionSay()
-    {
-        
-        return $this->render('say');
-    }
-
-    
-    public function actionAggiungicaregiver()
-    {
-        $model = new \app\models\Caregiver();
-    
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                // form inputs are valid, do something here
-                return;
-            }
-        }
-    
-        return $this->render('aggiungicaregiver', [
-            'model' => $model,
-        ]);
-    }
-    
-    public function actionAggiungiparola()
-    {
-        $model = new \app\models\Parola();
-    
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                // form inputs are valid, do something here
-                return;
-            }
-        }
-    
-        return $this->render('aggiungiparola', [
-            'model' => $model,
-        ]);
-    }
+  
 
     protected function tabellaAccessi()
     {

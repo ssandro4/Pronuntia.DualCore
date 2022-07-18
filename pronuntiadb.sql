@@ -127,11 +127,11 @@ FROM
 
 insert into Paziente value
 (1,"Domenico","Gialli","dislessia, discalculia",1,1001, true);
-insert into parola (idparola, pathIMG) values
-("Cane",'http://www.veterinarimatera.it/wp-content/uploads/2021/03/cane-1.jpg'),
-("Serpente",'https://as2.ftcdn.net/v2/jpg/00/46/08/69/1000_F_46086991_yOEe4Zbqdt6K8eOR9vUGkR3M40NPHBQ5.jpg'),
-("Cono",'https://previews.123rf.com/images/jiripravda/jiripravda1208/jiripravda120800012/14788432-traffico-cono-arancione.jpg'),
-("Gatto",'https://www.helvetia.com/it/web/it/chi-siamo/blog/Assicurazione/animali/assicurazione-gatto/_jcr_content/storyparsys-01/storystage_copy_1249/image.1645114768564.transform-fp/960x540/assicurazione-gatto.jpg');
+insert into parola (idparola, tag, pathIMG) values
+("Cane",'animale, natura, zampe','http://www.veterinarimatera.it/wp-content/uploads/2021/03/cane-1.jpg'),
+("Serpente",'animale, giungla','https://as2.ftcdn.net/v2/jpg/00/46/08/69/1000_F_46086991_yOEe4Zbqdt6K8eOR9vUGkR3M40NPHBQ5.jpg'),
+("Cono",'forma, strada','https://previews.123rf.com/images/jiripravda/jiripravda1208/jiripravda120800012/14788432-traffico-cono-arancione.jpg'),
+("Gatto",'animale, casa','https://www.helvetia.com/it/web/it/chi-siamo/blog/Assicurazione/animali/assicurazione-gatto/_jcr_content/storyparsys-01/storystage_copy_1249/image.1645114768564.transform-fp/960x540/assicurazione-gatto.jpg');
 
 
 insert into esercizio (idesercizio, parola, tipo, logopedista) values

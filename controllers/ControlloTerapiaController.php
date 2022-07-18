@@ -18,9 +18,9 @@ class ControlloTerapiaController extends \yii\web\Controller
         }
 
         $model = Paziente::findOne(['idPaziente' => $idPaziente]);
-        if ($model->caregiver != Yii::$app->user->id && $model->logopedista != Yii::$app->user->id)
+        if ($model->caregiver != Yii::$app->user->id && $model->logopedista != Yii::$app->user->id){
             return $this->goHome();
-
+}
         $sessioni = Assegnazionesessione::find()
             ->where(['paziente' => $idPaziente])
             ->orderBy(['dataCreazione' => SORT_DESC])
@@ -83,9 +83,9 @@ class ControlloTerapiaController extends \yii\web\Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-caregiver');
         }
-        if (Yii::$app->user->identity->tipo != 'caregiver')
+        if (Yii::$app->user->identity->tipo != 'caregiver'){
             return $this->goHome();
-
+}
         $sessioni = Assegnazionesessione::find()
             ->where(['paziente' => $idPaziente])
             ->andwhere(['nuovo' => 1])

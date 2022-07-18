@@ -132,7 +132,7 @@ use yii\bootstrap4\Modal;
         <p align='left'>Per ogni esercizio è possibile dare un esito positivo o negativo. Nel caso l'esito risulti incerto per un qualsivoglia motivo si consiglia di segnare l'esito come negativo e 
         di segnalare la problematica nel campo <b>Nota</b> in fondo alla pagina indicando la parola con cui il paziente ha avuto difficoltà e 
         il tipo di problema incontrato.
-        </body></html>";;
+        </body></html>";
         Modal::end();
         ?>
     </div>

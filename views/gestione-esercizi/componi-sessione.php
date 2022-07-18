@@ -7,7 +7,6 @@ use app\models\Esercizio;
 /* @var $this yii\web\View */
 /* @var $model app\models\Composizionesessione */
 
-//$this->title = 'Create Composizionesessione';
 ?>
 <div class="composizionesessione-create">
 

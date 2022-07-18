@@ -5,7 +5,6 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Parola */
 
-//$this->title = 'Aggiungi una parola al vocabolario';
 ?>
 
 <div class="parola-create">

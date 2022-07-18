@@ -27,9 +27,5 @@ $sound = Parola::findOne(['idParola' => $esercizio->parola])->pathMP3;
     <?php echo $sound?>
 </iframe>
 
-<!--
-    <audio controls>
-        <source src=<?php $sound ?> type="audio/mp3">
-        Your browser does not support the audio element.
-</audio>-->
+
 </div>

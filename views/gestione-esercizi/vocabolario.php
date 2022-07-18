@@ -37,8 +37,7 @@ use app\models\Parola;
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); 
-    ?>
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -66,7 +65,7 @@ use app\models\Parola;
                 'class' => ActionColumn::class,
                 'template' => '{update}',
                 'urlCreator' => function ($action, Parola $model ) {
-                    return Url::to(['gestione-esercizi/modifica-parola', 'idParola' =>  $model['idParola']]);;
+                    return Url::to(['gestione-esercizi/modifica-parola', 'idParola' =>  $model['idParola']]);
                 },
                 'header' => 'Modifica',
                 'headerOptions' => ['style' => 'width:2%']

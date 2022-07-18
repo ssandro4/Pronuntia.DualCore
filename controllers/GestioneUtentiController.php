@@ -24,7 +24,6 @@ class GestioneUtentiController extends \yii\web\Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                //    return $this->redirect(['view-profilo-caregiver', 'idCaregiver' => $model->idCaregiver]);
                 return $this->redirect('index-logopedista');
             }
         } else {
@@ -48,7 +47,6 @@ class GestioneUtentiController extends \yii\web\Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                //    return $this->redirect(['view-profilo-caregiver', 'idCaregiver' => $model->idCaregiver]);
                 return $this->redirect(Url::previous());
             }
         } else {
@@ -147,8 +145,10 @@ class GestioneUtentiController extends \yii\web\Controller
             return $this->goHome();
         }
 
-        if (Yii::$app->user->identity->id != $idCaregiver)
+        if (Yii::$app->user->identity->id != $idCaregiver) {
             return $this->redirect('/site/index');
+        }
+
         $model = $this->findCaregiver($idCaregiver);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {

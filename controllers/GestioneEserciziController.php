@@ -151,9 +151,7 @@ class GestioneEserciziController extends \yii\web\Controller
         $model1->logopedista = Yii::$app->user->identity->id;
         if ($this->request->isPost) {
             if ($model1->load($this->request->post()) && $model1->save()) {
-                //  return $this->actionComponiSessione($model1->idSessione);
                 return $this->redirect(['componi-sessione', 'sessione' => $model1->idSessione]);
-                //return $this->redirect(['view', 'idSessione' => $model1->idSessione]);
             }
         } else {
             $model1->loadDefaultValues();
@@ -235,7 +233,7 @@ class GestioneEserciziController extends \yii\web\Controller
     }
 
 
-     public function actionModificaParola($idParola)
+    public function actionModificaParola($idParola)
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect('/site/login-logopedista');
@@ -288,7 +286,6 @@ class GestioneEserciziController extends \yii\web\Controller
             return $this->goHome();
         }
         $searchModel = new ComposizionesessioneSearch();
-        // $dataProvider = $searchModel->search($this->request->queryParams);
         $dataProvider = $searchModel->searchBySessione($idSessione);
 
         return $this->render('view-sessione', [

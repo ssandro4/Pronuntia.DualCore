@@ -87,7 +87,7 @@ AppAsset::register($this);
                     'items' => [
                         ['label' => 'Home', 'url' => ['/site/index']],
                         ['label' => 'Modifica i tuoi dati', 'url' => ['/gestione-utenti/modifica-profilo-caregiver?idCaregiver=' . Yii::$app->user->identity->id]],
-                        ['label' => 'I tuoi pazienti', 'url' => ['/gestione-utenti/index-caregiver']],
+                        ['label' => 'I miei pazienti', 'url' => ['/gestione-utenti/index-caregiver']],
 
                         ('<li>'
                             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
